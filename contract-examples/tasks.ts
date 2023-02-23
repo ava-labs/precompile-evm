@@ -15,6 +15,7 @@ const getRole = async (allowList, address) => {
   console.log(`${address} has role: ${ROLES[role.toNumber()]}`)
 }
 
+// npx hardhat accounts --network local
 task("accounts", "Prints the list of accounts", async (args, hre): Promise<void> => {
   const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
   accounts.forEach((account: SignerWithAddress): void => {
@@ -22,6 +23,7 @@ task("accounts", "Prints the list of accounts", async (args, hre): Promise<void>
   })
 })
 
+// npx hardhat balances --network local
 task("balances", "Prints the list of account balances", async (args, hre): Promise<void> => {
   const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
   for (const account of accounts) {
@@ -32,7 +34,7 @@ task("balances", "Prints the list of account balances", async (args, hre): Promi
   }
 })
 
-
+// npx hardhat balance --network local --address [address]
 task("balance", "get the balance")
   .addParam("address", "the address you want to know balance of")
   .setAction(async (args, hre) => {
@@ -41,7 +43,7 @@ task("balance", "get the balance")
     console.log(`balance: ${balanceInCoin} Coin`)
   })
 
-// npx hardhat allowList:readRole --network local --address [address]
+// npx hardhat helloWorld:readRole --network local --address [address]
 task("helloWorld:readRole", "Gets the network enabled allow list")
   .addParam("address", "the address you want to know the allowlist role for")
   .setAction(async (args, hre) => {
@@ -49,7 +51,7 @@ task("helloWorld:readRole", "Gets the network enabled allow list")
     await getRole(allowList, args.address)
   })
 
-// npx hardhat allowList:addEnabled --network local --address [address]
+// npx hardhat helloWorld:addEnabled --network local --address [address]
 task("helloWorld:addEnabled", "Adds the enabled on the allow list")
   .addParam("address", "the address you want to add as a enabled")
   .setAction(async (args, hre) => {
@@ -59,7 +61,7 @@ task("helloWorld:addEnabled", "Adds the enabled on the allow list")
     await getRole(allowList, args.address)
   })
 
-// npx hardhat allowList:addAdmin --network local --address [address]
+// npx hardhat helloWorld:addAdmin --network local --address [address]
 task("helloWorld:addAdmin", "Adds an admin on the allowlist")
   .addParam("address", "the address you want to add as a admin")
   .setAction(async (args, hre) => {
@@ -68,19 +70,20 @@ task("helloWorld:addAdmin", "Adds an admin on the allowlist")
     await getRole(allowList, args.address)
   })
 
-// npx hardhat allowList:sayHello --network local --address [address]
+// npx hardhat helloWorld:sayHello --network local
 task("helloWorld:sayHello", "Says hello")
   .setAction(async (args, hre) => {
     const helloWorld = await hre.ethers.getContractAt("IHelloWorld", HELLO_WORLD_ADDRESS)
-    const result = await helloWorld.areFeeRecipientsAllowed()
+    const result = await helloWorld.sayHello()
     console.log(result)
   })
 
+// npx hardhat helloWorld:setGreeting --network local --greeting [greeting]
 task("helloWorld:setGreeting", "Says hello")
   .addParam("greeting", "the greeting string you want to set")
   .setAction(async (args, hre) => {
     const helloWorld = await hre.ethers.getContractAt("IHelloWorld", HELLO_WORLD_ADDRESS)
-    const result = await helloWorld.setGreeting(args.address)
+    const result = await helloWorld.setGreeting(args.greeting)
     console.log(result)
   })
 
