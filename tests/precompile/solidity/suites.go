@@ -6,6 +6,7 @@ package solidity
 
 import (
 	"context"
+	"time"
 
 	"github.com/ava-labs/avalanchego/api/health"
 	"github.com/ava-labs/subnet-evm/tests/utils"
@@ -25,7 +26,15 @@ var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
 var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
 	// Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
 	// to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
+	ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
+		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+		defer cancel()
 
+		utils.ExecuteHardHatTestOnNewBlockchain(ctx, "hello_world")
+	})
+
+	// TODO: can we refactor this so that it automagically checks to ensure each hardhat test file matches the name of a hardhat genesis file
+	// and then runs the hardhat tests for each one without forcing precompile developers to modify this file.
 	// ADD YOUR PRECOMPILE HERE
 	/*
 		ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {

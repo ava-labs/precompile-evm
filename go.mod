@@ -7,11 +7,12 @@ replace github.com/ava-labs/subnet-evm => github.com/ava-labs/subnet-evm v0.4.10
 
 require (
 	github.com/ava-labs/avalanchego v1.9.9
-	github.com/ava-labs/subnet-evm v0.4.10
+	github.com/ava-labs/subnet-evm v0.4.9
 	github.com/ethereum/go-ethereum v1.10.26
 	github.com/go-cmd/cmd v1.4.1
 	github.com/onsi/ginkgo/v2 v2.6.1
 	github.com/onsi/gomega v1.24.2
+	github.com/stretchr/testify v1.8.1
 )
 
 require (
@@ -78,7 +79,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.12.0 // indirect
 	github.com/status-im/keycard-go v0.0.0-20200402102358-957c09536969 // indirect
-	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
 	github.com/supranational/blst v0.3.11-0.20220920110316-f72618070295 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20220614013038-64ee5596c38a // indirect
