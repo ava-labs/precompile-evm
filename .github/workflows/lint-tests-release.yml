@@ -41,8 +41,6 @@ jobs:
         shell: bash
       - run: ./scripts/build_test.sh -race
         shell: bash
-      - run: ./scripts/coverage.sh
-        shell: bash
 
   e2e_test:
     name: e2e tests
