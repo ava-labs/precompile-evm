@@ -34,7 +34,7 @@ describe("ExampleHelloWorld", function () {
     expect(result).to.equal("Hello World!");
   });
 
-  it("contract should not be able to set greeting without enabled", async function () {
+  it("contract should not be able to set greeting without enabled role", async function () {
     const modifiedGreeting = "What's up";
     let contractRole = await adminSignerPrecompile.readAllowList(helloWorldContract.address);
     expect(contractRole).to.be.equal(0); // 0 = NONE
@@ -48,7 +48,7 @@ describe("ExampleHelloWorld", function () {
     expect.fail("should have errored")
   })
 
-  it("should be add contract to enabled list", async function () {
+  it("should be able to add contract to enabled list", async function () {
     let contractRole = await adminSignerPrecompile.readAllowList(helloWorldContract.address);
     expect(contractRole).to.be.equal(0)
 
