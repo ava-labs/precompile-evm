@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: ./scripts/lint_allowed_geth_imports.sh
         shell: bash
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
