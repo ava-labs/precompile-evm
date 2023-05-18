@@ -49,6 +49,4 @@ var _ = ginkgo.BeforeSuite(func() {
 var _ = ginkgo.AfterSuite(func() {
 	gomega.Expect(startCmd).ShouldNot(gomega.BeNil())
 	gomega.Expect(startCmd.Stop()).Should(gomega.BeNil())
-	// TODO add a new node to bootstrap off of the existing node and ensure it can bootstrap all subnets
-	// created during the test
 })

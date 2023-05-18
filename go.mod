@@ -2,8 +2,6 @@ module github.com/ava-labs/precompilevm
 
 go 1.18
 
-// TODO remove this after v0.4.10 is released
-
 require (
 	github.com/ava-labs/avalanchego v1.10.1
 	github.com/ava-labs/subnet-evm v0.5.1
