@@ -7,83 +7,50 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/ava-labs/subnet-evm/precompile/allowlist"
 	"github.com/ava-labs/subnet-evm/precompile/precompileconfig"
+	"github.com/ava-labs/subnet-evm/precompile/testutils"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/stretchr/testify/require"
 )
 
-func TestVerifyHelloWorldConfig(t *testing.T) {
-	admins := []common.Address{{1}}
-	tests := []struct {
-		name          string
-		config        precompileconfig.Config
-		ExpectedError string
-	}{
-		{
-			name:          "invalid allow list config in hello world allowlist",
-			config:        NewConfig(big.NewInt(3), admins, admins),
-			ExpectedError: "cannot set address",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			require := require.New(t)
-
-			err := tt.config.Verify()
-			if tt.ExpectedError == "" {
-				require.NoError(err)
-			} else {
-				require.ErrorContains(err, tt.ExpectedError)
-			}
-		})
-	}
+func TestVerify(t *testing.T) {
+	// We don't have a custom verification logic for HelloWorld
+	// so we just test the allowlist verification logic with a nil custom verifyTests input.
+	// VerifyPrecompileWithAllowListTests will add the allowlist verification logic tests for us.
+	allowlist.VerifyPrecompileWithAllowListTests(t, Module, nil)
 }
 
 func TestEqualHelloWorldConfig(t *testing.T) {
-	admins := []common.Address{{1}}
-	enableds := []common.Address{{2}}
-	tests := []struct {
-		name     string
-		config   precompileconfig.Config
-		other    precompileconfig.Config
-		expected bool
-	}{
-		{
-			name:     "non-nil config and nil other",
-			config:   NewConfig(big.NewInt(3), admins, enableds),
-			other:    nil,
-			expected: false,
+	admins := []common.Address{allowlist.TestAdminAddr}
+	enableds := []common.Address{allowlist.TestEnabledAddr}
+	tests := map[string]testutils.ConfigEqualTest{
+		"non-nil config and nil other": {
+			Config:   NewConfig(big.NewInt(3), admins, enableds),
+			Other:    nil,
+			Expected: false,
 		},
-		{
-			name:     "different type",
-			config:   NewConfig(big.NewInt(3), admins, enableds),
-			other:    precompileconfig.NewNoopStatefulPrecompileConfig(),
-			expected: false,
+		"different type": {
+			Config:   NewConfig(big.NewInt(3), admins, enableds),
+			Other:    precompileconfig.NewNoopStatefulPrecompileConfig(),
+			Expected: false,
 		},
-		{
-			name:     "different timestamp",
-			config:   NewConfig(big.NewInt(3), admins, nil),
-			other:    NewConfig(big.NewInt(4), admins, nil),
-			expected: false,
+		"different timestamp": {
+			Config:   NewConfig(big.NewInt(3), admins, nil),
+			Other:    NewConfig(big.NewInt(4), admins, nil),
+			Expected: false,
 		},
-		{
-			name:     "different enabled",
-			config:   NewConfig(big.NewInt(3), admins, nil),
-			other:    NewConfig(big.NewInt(3), admins, enableds),
-			expected: false,
+		"different enabled": {
+			Config:   NewConfig(big.NewInt(3), admins, nil),
+			Other:    NewConfig(big.NewInt(3), admins, enableds),
+			Expected: false,
 		},
-		{
-			name:     "same config",
-			config:   NewConfig(big.NewInt(3), admins, nil),
-			other:    NewConfig(big.NewInt(3), admins, nil),
-			expected: true,
+		"same config": {
+			Config:   NewConfig(big.NewInt(3), admins, nil),
+			Other:    NewConfig(big.NewInt(3), admins, nil),
+			Expected: true,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			require := require.New(t)
-
-			require.Equal(tt.expected, tt.config.Equal(tt.other))
-		})
-	}
+	// EqualPrecompileWithAllowListTests will add the allowlist verification logic tests for us.
+	// We also add the custom tests defined above as [tests] input to the function.
+	allowlist.EqualPrecompileWithAllowListTests(t, Module, tests)
 }

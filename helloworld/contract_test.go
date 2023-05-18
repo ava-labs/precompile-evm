@@ -15,13 +15,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestHelloWorld(t *testing.T) {
-	testGreeting := "test"
-	tests := map[string]testutils.PrecompileTest{
+var (
+	testGreeting = "test"
+	tests        = map[string]testutils.PrecompileTest{
 		"set greeting from no role fails": {
 			Caller:     allowlist.TestNoRoleAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting("test")
 				require.NoError(t, err)
 
@@ -34,7 +34,7 @@ func TestHelloWorld(t *testing.T) {
 		"set greeting from enabled address": {
 			Caller:     allowlist.TestEnabledAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -43,7 +43,7 @@ func TestHelloWorld(t *testing.T) {
 			SuppliedGas: SetGreetingGasCost,
 			ReadOnly:    false,
 			ExpectedRes: []byte{},
-			AfterHook: func(t *testing.T, state contract.StateDB) {
+			AfterHook: func(t testing.TB, state contract.StateDB) {
 				greeting := GetGreeting(state)
 				require.Equal(t, greeting, testGreeting)
 			},
@@ -51,7 +51,7 @@ func TestHelloWorld(t *testing.T) {
 		"set greeting from admin address": {
 			Caller:     allowlist.TestAdminAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -60,7 +60,7 @@ func TestHelloWorld(t *testing.T) {
 			SuppliedGas: SetGreetingGasCost,
 			ReadOnly:    false,
 			ExpectedRes: []byte{},
-			AfterHook: func(t *testing.T, state contract.StateDB) {
+			AfterHook: func(t testing.TB, state contract.StateDB) {
 				greeting := GetGreeting(state)
 				require.Equal(t, greeting, testGreeting)
 			},
@@ -68,7 +68,7 @@ func TestHelloWorld(t *testing.T) {
 		"get default hello from non-enabled address": {
 			Caller:     allowlist.TestNoRoleAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
 
@@ -79,17 +79,19 @@ func TestHelloWorld(t *testing.T) {
 			ReadOnly:    true,
 			ExpectedRes: func() []byte {
 				res, err := PackSayHelloOutput(defaultGreeting)
-				require.NoError(t, err)
+				if err != nil {
+					panic(err)
+				}
 				return res
 			}(),
 		},
 		"store greeting then say hello from non-enabled address": {
 			Caller: allowlist.TestNoRoleAddr,
-			BeforeHook: func(t *testing.T, state contract.StateDB) {
+			BeforeHook: func(t testing.TB, state contract.StateDB) {
 				allowlist.SetDefaultRoles(Module.Address)(t, state)
 				StoreGreeting(state, testGreeting)
 			},
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
 
@@ -99,14 +101,16 @@ func TestHelloWorld(t *testing.T) {
 			ReadOnly:    true,
 			ExpectedRes: func() []byte {
 				res, err := PackSayHelloOutput(testGreeting)
-				require.NoError(t, err)
+				if err != nil {
+					panic(err)
+				}
 				return res
 			}(),
 		},
 		"set a very long greeting from enabled address": {
 			Caller:     allowlist.TestEnabledAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				longString := "a very long string that is longer than 32 bytes and will cause an error"
 				input, err := PackSetGreeting(longString)
 				require.NoError(t, err)
@@ -120,7 +124,7 @@ func TestHelloWorld(t *testing.T) {
 		"readOnly setFeeConfig with noRole fails": {
 			Caller:     allowlist.TestNoRoleAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -133,7 +137,7 @@ func TestHelloWorld(t *testing.T) {
 		"readOnly setFeeConfig with enabled role fails": {
 			Caller:     allowlist.TestEnabledAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -146,7 +150,7 @@ func TestHelloWorld(t *testing.T) {
 		"readOnly setFeeConfig with admin role fails": {
 			Caller:     allowlist.TestAdminAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -159,7 +163,7 @@ func TestHelloWorld(t *testing.T) {
 		"insufficient gas setFeeConfig from admin": {
 			Caller:     allowlist.TestAdminAddr,
 			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
-			InputFn: func(t *testing.T) []byte {
+			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(testGreeting)
 				require.NoError(t, err)
 
@@ -170,6 +174,16 @@ func TestHelloWorld(t *testing.T) {
 			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
 		},
 	}
+)
 
+func TestHelloWorld(t *testing.T) {
+	// RunPrecompileWithAllowListTests will add the allowlist verification logic tests for us.
+	// We also add the custom tests defined above as [tests] input to the function.
 	allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)
+}
+
+func BenchmarkHelloWorld(b *testing.B) {
+	// BenchPrecompileWithAllowList will add the allowlist benchmarks for us.
+	// We also add the custom tests defined above as [tests] input to the function.
+	allowlist.BenchPrecompileWithAllowList(b, Module, state.NewTestStateDB, tests)
 }
