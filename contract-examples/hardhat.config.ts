@@ -1,10 +1,11 @@
 import "@nomiclabs/hardhat-waffle"
+import "@nomiclabs/hardhat-ethers"
 import "./tasks.ts"
 
 // HardHat users must populate these environment variables in order to connect to their subnet-evm instance
 // Since the blockchainID is not known in advance, there's no good default to use and we use the C-Chain here.
 var local_rpc_uri = process.env.RPC_URI || "http://127.0.0.1:9650/ext/bc/C/rpc"
-var local_chain_id = parseInt(process.env.CHAIN_ID,10) || 99999
+var local_chain_id = parseInt(process.env.CHAIN_ID, 10) || 43112
 
 export default {
   solidity: {
@@ -32,6 +33,17 @@ export default {
       // expected to be populated by the environment variables above
       url: local_rpc_uri,
       chainId: local_chain_id,
+      // accounts contains private keys of following addresses(in order):
+      // 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+      // 0x9632a79656af553F58738B0FB750320158495942
+      // 0x55ee05dF718f1a5C1441e76190EB1a19eE2C9430
+      // 0x4Cf2eD3665F6bFA95cE6A11CFDb7A2EF5FC1C7E4
+      // 0x0B891dB1901D4875056896f28B6665083935C7A8
+      // 0x01F253bE2EBF0bd64649FA468bF7b95ca933BDe2
+      // 0x78A23300E04FB5d5D2820E23cc679738982e1fd5
+      // 0x3C7daE394BBf8e9EE1359ad14C1C47003bD06293
+      // 0x61e0B3CD93F36847Abbd5d40d6F00a8eC6f3cfFB
+      // 0x0Fa8EA536Be85F32724D57A37758761B86416123
       accounts: [
         "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
         "0x7b4198529994b0dc604278c99d153cfd069d594753d471171a1d102a10438e07",
