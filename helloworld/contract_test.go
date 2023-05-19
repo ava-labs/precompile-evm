@@ -1,6 +1,3 @@
-// (c) 2019-2023, Ava Labs, Inc. All rights reserved.
-// See the file LICENSE for licensing terms.
-
 package helloworld
 
 import (
@@ -176,6 +173,12 @@ var (
 	}
 )
 
+// TestRun tests the Run function of the precompile contract.
+// These tests are run against the precompile contract directly with
+// the given input and expected output. They're just a guide to
+// help you write your own tests. These tests are for general cases like
+// allowlist, readOnly behaviour, and gas cost. You should write your own
+// tests for specific cases.
 func TestHelloWorld(t *testing.T) {
 	// RunPrecompileWithAllowListTests will add the allowlist verification logic tests for us.
 	// We also add the custom tests defined above as [tests] input to the function.
