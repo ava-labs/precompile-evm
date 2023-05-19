@@ -71,7 +71,7 @@ RPC_URI=http://127.0.0.1:9650/ext/bc/28N1Tv5CZziQ3FKCaXmo8xtxoFtuoVA6NvZykAT5MtG
 
 Alternatively, you can copy and paste the `local` network configuration to create a new network configuration for your own local testing. For example, you can copy and paste the `local` network configuration to create your own network and fill in the required details:
 
-```json
+```js
 {
   "networks": {
     "mynetwork": {
