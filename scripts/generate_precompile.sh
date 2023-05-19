@@ -14,12 +14,14 @@ ROOT_DIR_PATH=$(
   cd "$(dirname "${BASH_SOURCE[0]}")"
   cd .. && pwd
 )
+# Load the versions
+source "$ROOT_DIR_PATH"/scripts/versions.sh
 
 # Load the constants
 source "$ROOT_DIR_PATH"/scripts/constants.sh
 
 echo "installing precompilegen"
-go get github.com/ava-labs/subnet-evm/cmd/precompilegen
+go install github.com/ava-labs/subnet-evm/cmd/precompilegen@$SUBNET_EVM_VERSION
 
 echo "generating precompile"
-go run github.com/ava-labs/subnet-evm/cmd/precompilegen $@
+go run github.com/ava-labs/subnet-evm/cmd/precompilegen@$SUBNET_EVM_VERSION $@
