@@ -2,18 +2,6 @@ import { task } from "hardhat/config"
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { BigNumber } from "ethers"
 
-
-const ROLES = {
-  0: "None",
-  1: "Enabled",
-  2: "Admin",
-}
-
-const getRole = async (allowList, address) => {
-  const role = await allowList.readAllowList(address)
-  console.log(`${address} has role: ${ROLES[role.toNumber()]}`)
-}
-
 task("accounts", "Prints the list of accounts", async (args, hre): Promise<void> => {
   const accounts: SignerWithAddress[] = await hre.ethers.getSigners()
   accounts.forEach((account: SignerWithAddress): void => {

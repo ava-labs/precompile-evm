@@ -31,7 +31,6 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 Clone the repo and install the necessary packages via `yarn`.
 
 ```zsh
-$ git clone https://github.com/ava-labs/subnet-evm.git
 $ cd contract-examples
 $ yarn
 ```
