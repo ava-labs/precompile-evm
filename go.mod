@@ -4,9 +4,7 @@ go 1.19
 
 require (
 	github.com/ava-labs/avalanchego v1.10.1
-	github.com/ava-labs/subnet-evm v0.5.1
-	github.com/ethereum/go-ethereum v1.10.26
-	github.com/go-cmd/cmd v1.4.1
+	github.com/ava-labs/subnet-evm v0.5.2-0.20230529122812-adede150f330
 	github.com/onsi/ginkgo/v2 v2.6.1
 	github.com/onsi/gomega v1.24.2
 	github.com/stretchr/testify v1.8.1
@@ -25,9 +23,11 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
+	github.com/ethereum/go-ethereum v1.10.26 // indirect
 	github.com/fjl/memsize v0.0.0-20190710130421-bcb5799ab5e5 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gballet/go-libpcsclite v0.0.0-20191108122812-4678299bea08 // indirect
+	github.com/go-cmd/cmd v1.4.1 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
