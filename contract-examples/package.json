@@ -34,6 +34,8 @@
     "balances": "npx hardhat balances"
   },
   "dependencies": {
+    // TODO: change this once we publish the package
+    "subnet-evm-contract-examples": "file:../../subnet-evm/contract-examples",
     "typescript": "^4.3.5"
   },
   "engines": {
