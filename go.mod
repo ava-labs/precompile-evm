@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/ava-labs/avalanchego v1.10.1
-	github.com/ava-labs/subnet-evm v0.5.2-0.20230529122812-adede150f330
+	github.com/ava-labs/subnet-evm v0.5.2-0.20230607100948-6a43763b231c
 	github.com/onsi/ginkgo/v2 v2.6.1
 	github.com/onsi/gomega v1.24.2
 )

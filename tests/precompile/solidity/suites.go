@@ -9,11 +9,8 @@ import (
 	ginkgo "github.com/onsi/ginkgo/v2"
 )
 
-func init() {
-	utils.RegisterPingTest()
-}
-
 var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
+	utils.RegisterPingTest()
 	// Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
 	// to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
 

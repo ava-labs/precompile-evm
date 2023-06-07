@@ -52,6 +52,4 @@ _set_config $NODE_CONFIG_FILE_PATH
 
 CMD="$AVALANCHEGO_PATH --data-dir=$NODE_DATA_DIR --config-file=$NODE_CONFIG_FILE_PATH"
 
-./scripts/build.sh
-
 execute_cmd $CMD
