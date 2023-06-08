@@ -12,15 +12,9 @@ The goal of this guide is to lay out best practices regarding writing, testing a
 
 ## Prerequisites
 
-### NodeJS and Yarn
+### NodeJS and NPM
 
-First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). NodeJS bundles `npm`.
-
-Next, install [yarn](https://yarnpkg.com):
-
-```zsh
-npm install -g yarn
-```
+First, install the LTS (long-term support) version of [nodejs](https://nodejs.org/en). This is `18.16.0` at the time of writing. NodeJS bundles `npm`.
 
 ### Solidity and Avalanche
 
@@ -28,11 +22,11 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 
 ## Dependencies
 
-Clone the repo and install the necessary packages via `yarn`.
+Clone the repo and install the necessary packages via `npm`.
 
 ```zsh
 $ cd contract-examples
-$ yarn
+$ npm install
 ```
 
 ## Write Contracts

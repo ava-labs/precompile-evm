@@ -59,8 +59,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "14.x"
-      - name: Yarn install
-        run: yarn
+      - name: NPM install
+        run: npm install
         working-directory: ./contract-examples
       - name: Install AvalancheGo Release
         shell: bash
