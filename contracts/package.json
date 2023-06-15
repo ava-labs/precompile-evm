@@ -1,7 +1,6 @@
 {
-  "name": "@avalabs/precompilevm-contract-examples",
+  "name": "@avalabs/precompilevm-contracts",
   "devDependencies": {
-    "@avalabs/subnet-evm-contract-examples": "^1.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^4.7.1",
@@ -20,8 +19,14 @@
   },
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "repository": "https://github.com/ava-labs/precompilevm",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ava-labs/precompilevm.git",
+    "directory": "contracts"
+  },
   "license": "BSD-3-Clause",
   "scripts": {
     "compile": "npx hardhat compile",
@@ -35,5 +40,8 @@
   "engines": {
     "node": ">=18.16.0",
     "npm": ">6.0.0"
+  },
+  "dependencies": {
+    "@avalabs/subnet-evm-contracts": "file:../../subnet-evm/contracts/avalabs-subnet-evm-contracts-1.0.0.tgz"
   }
 }

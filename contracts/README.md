@@ -25,7 +25,7 @@ It is also helpful to have a basic understanding of [Solidity](https://docs.soli
 Clone the repo and install the necessary packages via `npm`.
 
 ```zsh
-$ cd contract-examples
+$ cd contracts
 $ npm install
 ```
 
