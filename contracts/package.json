@@ -35,13 +35,10 @@
     "lint": "prettier --list-different 'contracts/**/*.sol'"
   },
   "dependencies": {
-    "typescript": "^4.3.5"
+    "@avalabs/subnet-evm-contracts": "file:avalabs-subnet-evm-contracts-1.0.0.tgz"
   },
   "engines": {
     "node": ">=18.16.0",
     "npm": ">6.0.0"
-  },
-  "dependencies": {
-    "@avalabs/subnet-evm-contracts": "file:../../subnet-evm/contracts/avalabs-subnet-evm-contracts-1.0.0.tgz"
   }
 }
