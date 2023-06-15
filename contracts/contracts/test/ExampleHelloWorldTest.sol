@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 import "../ExampleHelloWorld.sol";
-import "../IHelloWorld.sol";
-import "@avalabs/subnet-evm-contract-examples/contracts/test/AllowListTest.sol";
+import "../interfaces/IHelloWorld.sol";
+import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
 
 contract ExampleHelloWorldTest is AllowListTest {
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);

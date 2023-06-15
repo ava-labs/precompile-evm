@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./IHelloWorld.sol";
+import "./interfaces/IHelloWorld.sol";
 
 address constant HELLO_WORLD_ADDRESS = 0x0300000000000000000000000000000000000000;
 

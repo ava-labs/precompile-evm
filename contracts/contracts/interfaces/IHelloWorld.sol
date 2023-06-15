@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity >=0.8.0;
-import "@avalabs/subnet-evm-contract-examples/contracts/IAllowList.sol";
+import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
 
 interface IHelloWorld is IAllowList {
   // sayHello returns the stored greeting string
