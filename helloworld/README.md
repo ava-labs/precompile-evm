@@ -1,8 +1,13 @@
+## Hello World Precompile
+
+This is a example precompile to demonstrate how to develop a precompile for PrecompilEVM. This is mainly used by [Hello World Precompile Tutorial](https://docs.avax.network/subnets/hello-world-precompile-tutorial).
 There are some must-be-done changes waiting in the generated file. Each area requiring you to add your code is marked with CUSTOM CODE to make them easy to find and modify.
 Additionally there are other files you need to edit to activate your precompile.
 These areas are highlighted with comments "ADD YOUR PRECOMPILE HERE".
 For testing take a look at other precompile tests in contract_test.go and config_test.go in other precompile folders.
 See the tutorial in <https://docs.avax.network/subnets/hello-world-precompile-tutorial> for more information about precompile development.
+
+On below you can find the original README.md of the precompile template.
 
 General guidelines for precompile development:
 1- Set a suitable config key in generated module.go. E.g: "yourPrecompileConfig"
