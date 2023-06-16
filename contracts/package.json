@@ -1,6 +1,7 @@
 {
   "name": "@avalabs/precompilevm-contracts",
   "devDependencies": {
+    "@avalabs/subnet-evm-contracts": "^1.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^4.7.1",
@@ -35,9 +36,6 @@
     "console": "npx hardhat console",
     "test": "npx hardhat test",
     "lint": "prettier --list-different 'contracts/**/*.sol'"
-  },
-  "dependencies": {
-    "@avalabs/subnet-evm-contracts": "file:avalabs-subnet-evm-contracts-1.0.0.tgz"
   },
   "engines": {
     "node": ">=18.16.0",
