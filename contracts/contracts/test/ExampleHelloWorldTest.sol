@@ -13,7 +13,7 @@ contract ExampleHelloWorldTest is AllowListTest {
     address exampleAddress = address(example);
 
     assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
-    assertEq(example.getHello(), "Hello World!");
+    assertEq(example.sayHello(), "Hello World!");
   }
 
   function step_doesNotSetGreetingBeforeEnabled() public {
@@ -37,6 +37,6 @@ contract ExampleHelloWorldTest is AllowListTest {
 
     string memory greeting = "testgreeting";
     example.setGreeting(greeting);
-    assertEq(example.getHello(), greeting);
+    assertEq(example.sayHello(), greeting);
   }
 }

@@ -45,8 +45,8 @@ var (
 	storageKeyHash = common.BytesToHash([]byte("storageKey"))
 )
 
-// GetHelloWorldAllowListStatus returns the role of [address] for the HelloWorld list.
-func GetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address) allowlist.Role {
+// sayHelloWorldAllowListStatus returns the role of [address] for the HelloWorld list.
+func sayHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address) allowlist.Role {
 	return allowlist.GetAllowListStatus(stateDB, ContractAddress, address)
 }
 
