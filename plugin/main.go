@@ -14,12 +14,12 @@ import (
 	// will cause the precompile to be registered with the subnet-evm.
 	_ "github.com/ava-labs/precompilevm/helloworld"
 	// ADD YOUR PRECOMPILE HERE
-	//_ "github.com/ava-labs/precompilevm/{yourprecompilepkg}"
+	//_ "github.com/ava-labs/precompile-evm/{yourprecompilepkg}"
 )
 
-const precompilevmVersion = "v0.0.0"
+const precompileEVMVersion = "v0.0.0"
 
 func main() {
-	versionString := fmt.Sprintf("PrecompilEVM/%s Subnet-EVM/%s [AvalancheGo=%s, rpcchainvm=%d]", precompilevmVersion, evm.Version, version.Current, version.RPCChainVMProtocol)
+	versionString := fmt.Sprintf("Precompile-EVM/%s Subnet-EVM/%s [AvalancheGo=%s, rpcchainvm=%d]", precompileEVMVersion, evm.Version, version.Current, version.RPCChainVMProtocol)
 	runner.Run(versionString)
 }
