@@ -1,10 +1,10 @@
-# PrecompilEVM
+# Precompile-EVM
 
-PrecompilEVM is a repository for registering precompiles to Subnet-EVM without forking the Subnet-EVM codebase. Subnet-EVM supports registering external precompiles through `precompile/modules` package. By importing Subnet-EVM as a library, you can register your own precompiles to Subnet-EVM and build it together with Subnet-EVM.
+Precompile-EVM is a repository for registering precompiles to Subnet-EVM without forking the Subnet-EVM codebase. Subnet-EVM supports registering external precompiles through `precompile/modules` package. By importing Subnet-EVM as a library, you can register your own precompiles to Subnet-EVM and build it together with Subnet-EVM.
 
 ## How to use
 
-There is an example branch [hello-world-example](https://github.com/ava-labs/precompilevm/tree/hello-world-example) in this repository. You can check the example branch to see how to register precompiles and test them.
+There is an example branch [hello-world-example](https://github.com/ava-labs/precompile-evm/tree/hello-world-example) in this repository. You can check the example branch to see how to register precompiles and test them.
 
 ### Generate Precompile Files
 

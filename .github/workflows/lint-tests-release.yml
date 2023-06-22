@@ -38,7 +38,7 @@ jobs:
           go-version: ${{ matrix.go }}
       - run: go mod download
         shell: bash
-      - run: ./scripts/build.sh ./build/precompilevm
+      - run: ./scripts/build.sh ./build/precompile-evm
         shell: bash
       - run: ./scripts/build_test.sh -race
         shell: bash

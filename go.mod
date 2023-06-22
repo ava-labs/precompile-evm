@@ -1,11 +1,10 @@
-module github.com/ava-labs/precompilevm
+module github.com/ava-labs/precompile-evm
 
 go 1.19
 
 require (
 	github.com/ava-labs/avalanchego v1.10.1
 	github.com/ava-labs/subnet-evm v0.5.2-0.20230615144219-985de4b13dc5
-	github.com/ethereum/go-ethereum v1.10.26
 	github.com/onsi/ginkgo/v2 v2.6.1
 	github.com/onsi/gomega v1.24.2
 )
@@ -23,6 +22,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
+	github.com/ethereum/go-ethereum v1.10.26 // indirect
 	github.com/fjl/memsize v0.0.0-20190710130421-bcb5799ab5e5 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gballet/go-libpcsclite v0.0.0-20191108122812-4678299bea08 // indirect
