@@ -1,6 +1,6 @@
 ## Hello World Precompile
 
-This is a example precompile to demonstrate how to develop a precompile for PrecompilEVM. This is mainly used by [Hello World Precompile Tutorial](https://docs.avax.network/subnets/hello-world-precompile-tutorial).
+This is a example precompile to demonstrate how to develop a precompile for Precompile-EVM. This is mainly used by [Hello World Precompile Tutorial](https://docs.avax.network/subnets/hello-world-precompile-tutorial).
 There are some must-be-done changes waiting in the generated file. Each area requiring you to add your code is marked with CUSTOM CODE to make them easy to find and modify.
 Additionally there are other files you need to edit to activate your precompile.
 These areas are highlighted with comments "ADD YOUR PRECOMPILE HERE".
