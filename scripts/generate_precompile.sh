@@ -20,8 +20,8 @@ source "$ROOT_DIR_PATH"/scripts/versions.sh
 # Load the constants
 source "$ROOT_DIR_PATH"/scripts/constants.sh
 
-echo "installing precompilegen"
+echo "installing precompilegen from Subnet-EVM $SUBNET_EVM_VERSION"
 go install github.com/ava-labs/subnet-evm/cmd/precompilegen@$SUBNET_EVM_VERSION
 
-echo "generating precompile"
+echo "generating precompile with Subnet-EVM $SUBNET_EVM_VERSION"
 go run github.com/ava-labs/subnet-evm/cmd/precompilegen@$SUBNET_EVM_VERSION $@
