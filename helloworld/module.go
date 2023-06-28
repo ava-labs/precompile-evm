@@ -18,7 +18,7 @@ const ConfigKey = "helloWorldConfig"
 
 // ContractAddress is the defined address of the precompile contract.
 // This should be unique across all precompile contracts.
-// See params/precompile_modules.go for registered precompile contracts and more information.
+// See precompile/registry/registry.go for registered precompile contracts and more information.
 var ContractAddress = common.HexToAddress("0x0300000000000000000000000000000000000000") // SET A SUITABLE HEX ADDRESS HERE
 
 // Module is the precompile module. It is used to register the precompile contract.

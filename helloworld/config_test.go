@@ -7,6 +7,7 @@ import (
 	"github.com/ava-labs/subnet-evm/precompile/allowlist"
 	"github.com/ava-labs/subnet-evm/precompile/precompileconfig"
 	"github.com/ava-labs/subnet-evm/precompile/testutils"
+
 	"github.com/ethereum/go-ethereum/common"
 )
 
@@ -38,7 +39,7 @@ func TestVerify(t *testing.T) {
 }
 
 // TestEqual tests the equality of Config with other precompile configs.
-func TestEqualHelloWorldConfig(t *testing.T) {
+func TestEqual(t *testing.T) {
 	admins := []common.Address{allowlist.TestAdminAddr}
 	enableds := []common.Address{allowlist.TestEnabledAddr}
 	tests := map[string]testutils.ConfigEqualTest{
@@ -53,22 +54,22 @@ func TestEqualHelloWorldConfig(t *testing.T) {
 			Expected: false,
 		},
 		"different timestamp": {
-			Config:   NewConfig(big.NewInt(3), admins, nil),
-			Other:    NewConfig(big.NewInt(4), admins, nil),
+			Config:   NewConfig(big.NewInt(3), admins, enableds),
+			Other:    NewConfig(big.NewInt(4), admins, enableds),
 			Expected: false,
 		},
+		"same config": {
+			Config:   NewConfig(big.NewInt(3), admins, enableds),
+			Other:    NewConfig(big.NewInt(3), admins, enableds),
+			Expected: true,
+		},
+		// CUSTOM CODE STARTS HERE
+		// Add your own Equal tests here
 		"different enabled": {
 			Config:   NewConfig(big.NewInt(3), admins, nil),
 			Other:    NewConfig(big.NewInt(3), admins, enableds),
 			Expected: false,
 		},
-		"same config": {
-			Config:   NewConfig(big.NewInt(3), admins, nil),
-			Other:    NewConfig(big.NewInt(3), admins, nil),
-			Expected: true,
-		},
-		// CUSTOM CODE STARTS HERE
-		// Add your own Equal tests here
 	}
 	// Run allow list equal tests.
 	// This adds allowlist equal tests to your custom tests
