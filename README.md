@@ -10,7 +10,7 @@ There is an example branch [hello-world-example](https://github.com/ava-labs/pre
 
 ```zsh
 git clone https://github.com/ava-labs/precompile-evm.git
-cd precompile-evm/
+cd precompile-evm/ # change directory to the precompile-evm/ directory
 ```
 
 ### Checkout the `hello-world-example` Branch
@@ -27,7 +27,7 @@ Switched to a new branch 'hello-world-example'
 First you have to `cd contracts/` and run `npm install` to get the dependencies.
 
 ```zsh
-cd contracts/
+cd contracts/ # change directory to the contracts/ directory
 npm install
 ```
 
@@ -42,16 +42,17 @@ cp contracts/contracts/interfaces/IHelloWorld.sol contracts/contracts/interfaces
 
 ### Install `solc` and Confirm Dependency Version
 
-Install the `solc` dependency
+Install the `solc` dependency.
 
 ```zsh
 brew install solidity
 ```
 
-Confirm `solc` is >=0.8.0
+Confirm `solc` is >=0.8.0.
 
 ```zsh
 solc --version
+
 solc, the solidity compiler commandline interface
 Version: 0.8.17+commit.8df45f5f.Darwin.appleclang
 ```
@@ -66,7 +67,7 @@ Passing in the following flags
   - ABI specification of the contracts.
 - `--base-path path`
   - Use the given path as the root of the source tree instead of the root of the filesystem.
-- `--include-path path  `
+- `--include-path path`
   - Make an additional source directory available to the default import callback. Use this option if you want to import contracts whose location is not fixed in relation to your main source tree, e.g. third-party libraries installed using a package manager. Can be used multiple times. Can only be used if base path has a non-empty value.
 - `--output-dir path`
   - If given, creates one file per output component and contract/file at the specified directory.
@@ -74,8 +75,9 @@ Passing in the following flags
   - Overwrite existing files (used together with `--output-dir`).
 
 ```zsh
-cd contracts/
+cd contracts/ # change directory to the contracts/ directory
 solc --abi contracts/interfaces/IHolaMundo.sol --output-dir abis --base-path . --include-path ./node_modules --overwrite
+
 Compiler run successful. Artifact(s) can be found in directory "abis".
 ```
 
@@ -84,22 +86,27 @@ Compiler run successful. Artifact(s) can be found in directory "abis".
 First, you need to create your precompile contract interface in the `contracts` directory and build the ABI. Then you can generate your precompile files with `./scripts/generate_precompile.sh --abi {abiPath} --out {outPath}`. This script installs the `precompilegen` tool from Subnet-EVM and runs it to generate your precompile.
 
 ```zsh
-cd ..
+cd .. # change directory back to the root directory of the repo
 ./scripts/generate_precompile.sh --abi contracts/abis/IHolaMundo.abi --out holamundo/
+
 Using branch: hello-world-example
 installing precompilegen from Subnet-EVM v0.5.2
 generating precompile with Subnet-EVM v0.5.2
 Precompile files generated successfully at:  holamundo/
+```
 
-tree holamundo
-holamundo
-├── README.md
-├── config.go
-├── config_test.go
-├── contract.abi
-├── contract.go
-├── contract_test.go
-└── module.go
+Confirm that the new `holamundo/` directory has the appropriate files.
+
+```zsh
+ls -lh helloworld
+
+-rw-r--r--  1 user group 2.3K Jul  5 13:26 README.md
+-rw-r--r--  1 user group 2.3K Jul  5 13:26 config.go
+-rw-r--r--  1 user group 2.8K Jul  5 13:26 config_test.go
+-rw-r--r--  1 user group 963B Jul  5 13:26 contract.abi
+-rw-r--r--  1 user group 8.1K Jul  5 13:26 contract.go
+-rw-r--r--  1 user group 8.3K Jul  5 13:26 contract_test.go
+-rw-r--r--  1 user group 2.7K Jul  5 13:26 module.go
 ```
 
 ### Register Precompile
