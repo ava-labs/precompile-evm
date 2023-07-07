@@ -33,6 +33,8 @@ npm install
 
 ### Create a New Contract
 
+`hello-world-example` branch has already a precompile contract called `HelloWorld.sol`. All necessary files were already created for you. You can check existing files and see how a fully implemented precompile should look like. If you'd like to redo steps to create a new precompile contract, you can follow the steps below.
+
 Copy the existing `IHelloWorld.sol` interface to a new file called `IHolaMundo.sol`.
 
 ```zsh
