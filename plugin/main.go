@@ -16,9 +16,9 @@ import (
 	//_ "github.com/ava-labs/precompile-evm/{yourprecompilepkg}"
 )
 
-const precompileEVMVersion = "v0.0.0"
+const Version = "v0.1.1"
 
 func main() {
-	versionString := fmt.Sprintf("Precompile-EVM/%s Subnet-EVM/%s [AvalancheGo=%s, rpcchainvm=%d]", precompileEVMVersion, evm.Version, version.Current, version.RPCChainVMProtocol)
+	versionString := fmt.Sprintf("Precompile-EVM/%s Subnet-EVM/%s [AvalancheGo=%s, rpcchainvm=%d]", Version, evm.Version, version.Current, version.RPCChainVMProtocol)
 	runner.Run(versionString)
 }
