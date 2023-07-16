@@ -53,11 +53,10 @@ var (
 
 // StoreGreeting sets the value of the storage key in the contract storage.
 func StoreCounterValue(stateDB contract.StateDB, value *big.Int) {
-	// Convert uint to left padded bytes
-	inputPadded := common.LeftPadBytes(value.Bytes(), 32)
-	inputHash := common.BytesToHash(inputPadded)
+	// Convert uint to Hash
+	valueHash := common.BigToHash(value)
 
-	stateDB.SetState(ContractAddress, storageKeyHash, inputHash)
+	stateDB.SetState(ContractAddress, storageKeyHash, valueHash)
 }
 
 // GetCounterValue gets the value of the storage key in the contract storage.
@@ -66,7 +65,7 @@ func GetCounterValue(stateDB contract.StateDB) *big.Int {
 	value := stateDB.GetState(ContractAddress, storageKeyHash)
 
 	// Convert bytes to uint
-	return new(big.Int).SetBytes(value.Bytes())
+	return value.Big()
 }
 
 // PackGetCounter packs the include selector (first 4 func signature bytes).
