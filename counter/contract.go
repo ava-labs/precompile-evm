@@ -51,7 +51,7 @@ var (
 	storageKeyHash = common.BytesToHash([]byte("counterValue"))
 )
 
-// StoreGreeting sets the value of the storage key in the contract storage.
+// StoreCounterValue sets the value of the storage key in the contract storage.
 func StoreCounterValue(stateDB contract.StateDB, value *big.Int) {
 	// Convert uint to Hash
 	valueHash := common.BigToHash(value)
