@@ -50,7 +50,7 @@ Install the `solc` dependency.
 brew install solidity
 ```
 
-Confirm `solc` is >=0.8.0.
+Confirm `solc` is >=0.8.8.
 
 ```zsh
 solc --version
