@@ -1,0 +1,85 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Avalanche Academy - Customize the EVM",
+    "dateExported": "2023-07-19T20:18:20.787Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "ca311172-6afd-4cc0-bcea-20501b8fabe0",
+            "name": "Network",
+            "containerId": "",
+            "created": "2023-07-19T18:13:45.726Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "095140e8-6392-4e81-81d6-50f7b0717f04",
+            "name": "Blockchains",
+            "containerId": "",
+            "created": "2023-07-19T18:16:37.286Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "5ec71731-46f4-414d-8b32-5926aaa5bf72",
+            "colId": "a7af0659-d012-480a-a25f-ab72f51b8ba4",
+            "containerId": "ca311172-6afd-4cc0-bcea-20501b8fabe0",
+            "name": "Status",
+            "url": "http://localhost:8081/v1/control/status",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-19T18:13:29.660Z",
+            "modified": "2023-07-19T18:13:29.660Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3478400e-2433-4443-976b-69a0314fc481",
+            "colId": "a7af0659-d012-480a-a25f-ab72f51b8ba4",
+            "containerId": "ca311172-6afd-4cc0-bcea-20501b8fabe0",
+            "name": "Health Check",
+            "url": "http://localhost:8081/v1/control/health",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-19T16:52:53.304Z",
+            "modified": "2023-07-19T16:52:53.304Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "798a8a15-dd77-44d2-ad25-24967dd6481d",
+            "colId": "a7af0659-d012-480a-a25f-ab72f51b8ba4",
+            "containerId": "ca311172-6afd-4cc0-bcea-20501b8fabe0",
+            "name": "URIs",
+            "url": "http://localhost:8081/v1/control/uris",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-07-19T18:14:36.709Z",
+            "modified": "2023-07-19T18:14:36.709Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "76f501ab-59cb-44e3-a9dc-265a181816ec",
+            "colId": "a7af0659-d012-480a-a25f-ab72f51b8ba4",
+            "containerId": "095140e8-6392-4e81-81d6-50f7b0717f04",
+            "name": "create Blockchain",
+            "url": "http://localhost:8081/v1/control/createblockchains",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-07-19T18:16:46.162Z",
+            "modified": "2023-07-19T18:45:22.144Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"blockchainSpecs\":[\n    {\n      \"vm_name\":\"subnetevm\",\n      \"genesis\":\"./tests/precompile/genesis/hello_world.json\"}\n    ]\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

@@ -52,7 +52,7 @@ func BenchmarkSha256(b *testing.B) {
 	// Benchmark tests.
 	for name, test := range tests {
 		b.Run(name, func(b *testing.B) {
-			test.Bench(b, module, newStateDB(b))
+			test.Bench(b, Module, state.NewTestStateDB(b))
 		})
 	}
 }
