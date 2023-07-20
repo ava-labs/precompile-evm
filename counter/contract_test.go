@@ -5,6 +5,7 @@
 package counter
 
 import (
+	"math/big"
 	"testing"
 
 	"github.com/ava-labs/subnet-evm/core/state"
@@ -59,7 +60,7 @@ var (
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
-				var testInput *big.Int
+				var testInput = big.NewInt(1)
 				input, err := PackSetCounter(testInput)
 				require.NoError(t, err)
 				return input
@@ -73,7 +74,7 @@ var (
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
-				var testInput *big.Int
+				var testInput = big.NewInt(1)
 				input, err := PackSetCounter(testInput)
 				require.NoError(t, err)
 				return input
@@ -99,7 +100,7 @@ func BenchmarkCounter(b *testing.B) {
 	// Benchmark tests.
 	for name, test := range tests {
 		b.Run(name, func(b *testing.B) {
-			test.Bench(b, module, newStateDB(b))
+			test.Bench(b, Module, state.NewTestStateDB(b))
 		})
 	}
 }
