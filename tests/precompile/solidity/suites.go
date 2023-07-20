@@ -15,15 +15,8 @@ import (
 var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
 	utils.RegisterPingTest()
 	// Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
-	// to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contracts/tests/)
-	ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
-		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-		defer cancel()
+	// to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
 
-		utils.RunDefaultHardhatTests(ctx, "hello_world")
-	})
-
-	// and then runs the hardhat tests for each one without forcing precompile developers to modify this file.
 	// ADD YOUR PRECOMPILE HERE
 	/*
 		ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
@@ -37,4 +30,11 @@ var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
 			utils.RunDefaultHardhatTests(ctx, "your_precompile")
 		})
 	*/
+
+	ginkgo.It("StringStore", ginkgo.Label("Precompile"), ginkgo.Label("StringStore"), func() {
+		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+		defer cancel()
+
+		utils.RunDefaultHardhatTests(ctx, "StringStore")
+	})
 })
