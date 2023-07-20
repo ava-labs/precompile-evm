@@ -1,0 +1,1 @@
+[{"inputs":[],"name":"getString","outputs":[{"internalType":"string","name":"value","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"value","type":"string"}],"name":"setString","outputs":[],"stateMutability":"nonpayable","type":"function"}]

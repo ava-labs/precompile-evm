@@ -1,0 +1,89 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Avalanche Academy - Customize the EVM",
+    "dateExported": "2023-07-20T14:26:13.398Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7bacae3d-c466-4ae5-bd71-91a862902838",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "Start Network",
+            "url": "http://localhost:8081/v1/control/start",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2023-07-19T22:27:55.001Z",
+            "modified": "2023-07-19T22:50:56.331Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"execPath\": \"{{AVALANCHEGO_EXEC_PATH}}\",\n  \"numNodes\": 5,\n  \"logLevel\": \"INFO\",\n  \"pluginDir\": \"{{AVALANCHEGO_PLUGIN_PATH}}\",\n  \"blockchainSpecs\": [\n    {\n      \"vm_name\": \"subnetevm\",\n      \"genesis\": \"Path to genesis\"\n    }\n  ]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf745dcf-1214-4773-9055-d2f14142d465",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "Create Blockchains",
+            "url": "http://localhost:8081/v1/control/createblockchains",
+            "method": "POST",
+            "sortNum": 17500,
+            "created": "2023-07-19T20:50:15.324Z",
+            "modified": "2023-07-19T20:50:15.324Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"blockchainSpecs\":[\n    {\n      \"vm_name\":\"subnetevm\",\n      \"genesis\":\"./tests/precompile/genesis/hello_world.json\"}\n    ]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d80a7da4-1136-4795-8940-fc50c26658bf",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "RPC URLs",
+            "url": "http://localhost:8081/v1/control/listrpcs",
+            "method": "POST",
+            "sortNum": 23750,
+            "created": "2023-07-19T22:42:55.324Z",
+            "modified": "2023-07-19T22:59:39.635Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c1a038c6-4759-4d49-8f71-8a222037cab9",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "Status",
+            "url": "http://localhost:8081/v1/control/status",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-07-19T20:50:15.322Z",
+            "modified": "2023-07-19T20:50:15.322Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d47c2d39-3193-40f4-a48a-a9b498a99b98",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "Health Check",
+            "url": "http://localhost:8081/v1/control/health",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-07-19T20:50:15.321Z",
+            "modified": "2023-07-19T20:50:15.321Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

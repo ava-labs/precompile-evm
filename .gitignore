@@ -23,8 +23,6 @@ awscpu
 
 *logs/
 
-.vscode*
-
 *.pb*
 
 *cpu[0-9]*
