@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"string","name":"value","type":"string"}],"name":"hashWithMD5","outputs":[{"internalType":"bytes16","name":"hash","type":"bytes16"}],"stateMutability":"view","type":"function"}]
