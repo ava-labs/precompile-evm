@@ -49,7 +49,7 @@ var (
 // UnpackHashWithSha256Input attempts to unpack [input] into the string type argument
 // assumes that [input] does not include selector (omits first 4 func signature bytes)
 func UnpackHashWithSha256Input(input []byte) (string, error) {
-	res, err := Sha256ABI.UnpackInput("hash_with_sha256", input)
+	res, err := Sha256ABI.UnpackInput("hashWithSHA256", input)
 	if err != nil {
 		return "", err
 	}
@@ -57,17 +57,17 @@ func UnpackHashWithSha256Input(input []byte) (string, error) {
 	return unpacked, nil
 }
 
-// PackHashWithSha256 packs [value] of type string into the appropriate arguments for hash_with_sha256.
+// PackHashWithSha256 packs [value] of type string into the appropriate arguments for hashWithSHA256.
 // the packed bytes include selector (first 4 func signature bytes).
 // This function is mostly used for tests.
 func PackHashWithSha256(value string) ([]byte, error) {
-	return Sha256ABI.Pack("hash_with_sha256", value)
+	return Sha256ABI.Pack("hashWithSHA256", value)
 }
 
 // PackHashWithSha256Output attempts to pack given hash of type [32]byte
 // to conform the ABI outputs.
 func PackHashWithSha256Output(hash [32]byte) ([]byte, error) {
-	return Sha256ABI.PackOutput("hash_with_sha256", hash)
+	return Sha256ABI.PackOutput("hashWithSHA256", hash)
 }
 
 func hashWithSha256(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
@@ -103,7 +103,7 @@ func createSha256Precompile() contract.StatefulPrecompiledContract {
 	var functions []*contract.StatefulPrecompileFunction
 
 	abiFunctionMap := map[string]contract.RunStatefulPrecompileFunc{
-		"hash_with_sha256": hashWithSha256,
+		"hashWithSHA256": hashWithSha256,
 	}
 
 	for name, function := range abiFunctionMap {
