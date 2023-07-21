@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Avalanche Academy - Customize the EVM",
-    "dateExported": "2023-07-21T20:42:18.217Z",
+    "dateExported": "2023-07-21T23:22:03.550Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -89,7 +89,7 @@
             "_id": "9716d6b7-ac0f-40e7-8ab4-e6a433b4fffe",
             "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
             "containerId": "",
-            "name": "Start Network Copy",
+            "name": "Stop Network",
             "url": "http://localhost:8081/v1/control/stop",
             "method": "POST",
             "sortNum": 50000,
