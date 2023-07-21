@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Avalanche Academy - Customize the EVM",
-    "dateExported": "2023-07-20T14:26:13.398Z",
+    "dateExported": "2023-07-21T20:42:18.217Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -14,12 +14,12 @@
             "method": "POST",
             "sortNum": 5000,
             "created": "2023-07-19T22:27:55.001Z",
-            "modified": "2023-07-19T22:50:56.331Z",
+            "modified": "2023-07-21T17:41:56.659Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"execPath\": \"{{AVALANCHEGO_EXEC_PATH}}\",\n  \"numNodes\": 5,\n  \"logLevel\": \"INFO\",\n  \"pluginDir\": \"{{AVALANCHEGO_PLUGIN_PATH}}\",\n  \"blockchainSpecs\": [\n    {\n      \"vm_name\": \"subnetevm\",\n      \"genesis\": \"Path to genesis\"\n    }\n  ]\n}",
+                "raw": "{\n  \"numNodes\": 5,\n  \"logLevel\": \"INFO\",\n  \"blockchainSpecs\": [\n    {\n      \"vm_name\": \"subnetevm\",\n      \"genesis\": \"path/to/your_genesis_file.json\"\n    }\n  ]\n}",
                 "form": []
             },
             "tests": []
@@ -33,12 +33,12 @@
             "method": "POST",
             "sortNum": 17500,
             "created": "2023-07-19T20:50:15.324Z",
-            "modified": "2023-07-19T20:50:15.324Z",
+            "modified": "2023-07-21T20:42:14.553Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"blockchainSpecs\":[\n    {\n      \"vm_name\":\"subnetevm\",\n      \"genesis\":\"./tests/precompile/genesis/hello_world.json\"}\n    ]\n}",
+                "raw": "{\n  \"blockchainSpecs\":[\n    {\n      \"vm_name\":\"subnetevm\",\n      \"genesis\":\"path/to/your_genesis_file.json\"}\n    ]\n}",
                 "form": []
             },
             "tests": []
@@ -52,7 +52,7 @@
             "method": "POST",
             "sortNum": 23750,
             "created": "2023-07-19T22:42:55.324Z",
-            "modified": "2023-07-19T22:59:39.635Z",
+            "modified": "2023-07-20T23:13:54.257Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -81,6 +81,20 @@
             "sortNum": 40000,
             "created": "2023-07-19T20:50:15.321Z",
             "modified": "2023-07-19T20:50:15.321Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9716d6b7-ac0f-40e7-8ab4-e6a433b4fffe",
+            "colId": "22862463-dd4c-4424-850a-e87a3da96cc0",
+            "containerId": "",
+            "name": "Start Network Copy",
+            "url": "http://localhost:8081/v1/control/stop",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-07-21T17:19:52.202Z",
+            "modified": "2023-07-21T17:20:04.559Z",
             "headers": [],
             "params": [],
             "tests": []
