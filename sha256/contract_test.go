@@ -21,17 +21,17 @@ import (
 // tests for specific cases.
 var (
 	tests = map[string]testutils.PrecompileTest{
-		"insufficient gas for hashWithSha256 should fail": {
+		"insufficient gas for hashWithSHA256 should fail": {
 			Caller: common.Address{1},
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
 				var testInput string
-				input, err := PackHashWithSha256(testInput)
+				input, err := PackHashWithSHA256(testInput)
 				require.NoError(t, err)
 				return input
 			},
-			SuppliedGas: HashWithSha256GasCost - 1,
+			SuppliedGas: HashWithSHA256GasCost - 1,
 			ReadOnly:    false,
 			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
 		},
