@@ -23,7 +23,7 @@ const (
 	// You should set a gas cost for each function in your contract.
 	// Generally, you should not set gas costs very low as this may cause your network to be vulnerable to DoS attacks.
 	// There are some predefined gas costs in contract/utils.go that you can use.
-	HashWithSha256GasCost uint64 = 1 /* SET A GAS COST HERE */
+	HashWithSHA256GasCost uint64 = 1 /* SET A GAS COST HERE */
 )
 
 // CUSTOM CODE STARTS HERE
@@ -46,9 +46,9 @@ var (
 	Sha256Precompile = createSha256Precompile()
 )
 
-// UnpackHashWithSha256Input attempts to unpack [input] into the string type argument
+// UnpackHashWithSHA256Input attempts to unpack [input] into the string type argument
 // assumes that [input] does not include selector (omits first 4 func signature bytes)
-func UnpackHashWithSha256Input(input []byte) (string, error) {
+func UnpackHashWithSHA256Input(input []byte) (string, error) {
 	res, err := Sha256ABI.UnpackInput("hashWithSHA256", input)
 	if err != nil {
 		return "", err
@@ -57,38 +57,37 @@ func UnpackHashWithSha256Input(input []byte) (string, error) {
 	return unpacked, nil
 }
 
-// PackHashWithSha256 packs [value] of type string into the appropriate arguments for hashWithSHA256.
+// PackHashWithSha256 packs [value] of type string into the appropriate arguments for hash_with_sha256.
 // the packed bytes include selector (first 4 func signature bytes).
 // This function is mostly used for tests.
-func PackHashWithSha256(value string) ([]byte, error) {
+func PackHashWithSHA256(value string) ([]byte, error) {
 	return Sha256ABI.Pack("hashWithSHA256", value)
 }
 
-// PackHashWithSha256Output attempts to pack given hash of type [32]byte
+// PackHashWithSHA256Output attempts to pack given hash of type [32]byte
 // to conform the ABI outputs.
-func PackHashWithSha256Output(hash [32]byte) ([]byte, error) {
+func PackHashWithSHA256Output(hash [32]byte) ([]byte, error) {
 	return Sha256ABI.PackOutput("hashWithSHA256", hash)
 }
 
-func hashWithSha256(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-	if remainingGas, err = contract.DeductGas(suppliedGas, HashWithSha256GasCost); err != nil {
+func hashWithSHA256(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, HashWithSHA256GasCost); err != nil {
 		return nil, 0, err
 	}
-	// attempts to unpack [input] into the arguments to the HashWithSha256Input.
+	// attempts to unpack [input] into the arguments to the HashWithSHA256Input.
 	// Assumes that [input] does not include selector
 	// You can use unpacked [inputStruct] variable in your code
-	inputStruct, err := UnpackHashWithSha256Input(input)
+	inputStruct, err := UnpackHashWithSHA256Input(input)
 	if err != nil {
 		return nil, remainingGas, err
 	}
 
 	// CUSTOM CODE STARTS HERE
-
-	var output [32]byte
+	var output [32]byte // CUSTOM CODE FOR AN OUTPUT
 
 	output = sha256.Sum256([]byte(inputStruct))
 
-	packedOutput, err := PackHashWithSha256Output(output)
+	packedOutput, err := PackHashWithSHA256Output(output)
 	if err != nil {
 		return nil, remainingGas, err
 	}
@@ -103,7 +102,7 @@ func createSha256Precompile() contract.StatefulPrecompiledContract {
 	var functions []*contract.StatefulPrecompileFunction
 
 	abiFunctionMap := map[string]contract.RunStatefulPrecompileFunc{
-		"hashWithSHA256": hashWithSha256,
+		"hashWithSHA256": hashWithSHA256,
 	}
 
 	for name, function := range abiFunctionMap {
