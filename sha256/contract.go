@@ -57,7 +57,7 @@ func UnpackHashWithSHA256Input(input []byte) (string, error) {
 	return unpacked, nil
 }
 
-// PackHashWithSha256 packs [value] of type string into the appropriate arguments for hashWithSHA256.
+// PackHashWithSHA256 packs [value] of type string into the appropriate arguments for hashWithSHA256.
 // the packed bytes include selector (first 4 func signature bytes).
 // This function is mostly used for tests.
 func PackHashWithSHA256(value string) ([]byte, error) {
