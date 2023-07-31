@@ -5,7 +5,6 @@
 package solidity
 
 import (
-	"github.com/ava-labs/subnet-evm/tests/utils"
 	"github.com/onsi/ginkgo/v2"
 )
 
@@ -26,8 +25,9 @@ func RegisterAsyncTests() {
 	subnetsSuite := utils.CreateSubnetsSuite(genesisFiles)
 	*/
 	_ = ginkgo.Describe("[Asynchronized Precompile Tests]", func() {
-		// Register the ping test first
-		utils.RegisterPingTest()
+		// Uncomment below and register the ping test first
+		// utils.RegisterPingTest()
+
 		// ADD YOUR PRECOMPILE HERE
 		/*
 			ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
