@@ -36,7 +36,8 @@ func RegisterAsyncTests() {
 
 				// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
 				// and the test file in ./contracts/tests/{your_precompile}.ts
-				runDefaultHardhatTests(ctx, "your_precompile")
+				blockchainID := subnetsSuite.GetBlockchainID("{your_precompile}")
+				runDefaultHardhatTests(ctx, blockchainID, "{your_precompile}")
 			})
 		*/
 	})

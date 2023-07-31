@@ -21,5 +21,5 @@ func TestE2E(t *testing.T) {
 	}
 	gomega.RegisterFailHandler(ginkgo.Fail)
 	solidity.RegisterAsyncTests()
-	ginkgo.RunSpecs(t, "subnet-evm precompile ginkgo test suite")
+	ginkgo.RunSpecs(t, "precompile-evm precompile ginkgo test suite")
 }
