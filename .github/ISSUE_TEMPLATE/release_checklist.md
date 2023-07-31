@@ -21,5 +21,3 @@ Link the relevant documentation PRs for this release.
 - [ ] Bump AvalancheGo dependency for RPCChainVM Compatibility
 - [ ] Add new entry in compatibility.json for RPCChainVM Compatibility
 - [ ] Update AvalancheGo compatibility in README
-- [ ] Bump cmd/simulator go mod (if needed)
-- [ ] Confirm goreleaser job has successfully generated binaries by checking the releases page
