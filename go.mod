@@ -7,6 +7,7 @@ require (
 	github.com/ava-labs/subnet-evm v0.5.3
 	github.com/onsi/ginkgo/v2 v2.8.1
 	github.com/onsi/gomega v1.26.0
+	github.com/stretchr/testify v1.8.3
 )
 
 require (
@@ -87,7 +88,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.12.0 // indirect
 	github.com/status-im/keycard-go v0.2.0 // indirect
-	github.com/stretchr/testify v1.8.3 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
 	github.com/supranational/blst v0.3.11-0.20220920110316-f72618070295 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20220614013038-64ee5596c38a // indirect
