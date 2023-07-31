@@ -6,25 +6,52 @@ package solidity
 
 import (
 	"github.com/ava-labs/subnet-evm/tests/utils"
-	ginkgo "github.com/onsi/ginkgo/v2"
+	"github.com/onsi/ginkgo/v2"
 )
 
-var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
-	utils.RegisterPingTest()
-	// Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
-	// to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
-
-	// ADD YOUR PRECOMPILE HERE
-	/*
-		ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
-			ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-			defer cancel()
-
-			// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
-			// and the test file in ./contracts/tests/{your_precompile}.ts
-			// If you want to use a different test command and genesis path than the defaults, you can
-			// use the utils.RunTestCMD. See utils.RunDefaultHardhatTests for an example.
-			utils.RunDefaultHardhatTests(ctx, "your_precompile")
-		})
+// Registers the Asynchronized Precompile Tests
+// Before running the tests, this function creates all subnets given in the genesis files
+// and then runs the hardhat tests for each one asynchronously if called with `ginkgo run -procs=`.
+func RegisterAsyncTests() {
+	/* Uncomment these if you want to use default hardhat tests
+	// Tests here assumes that the genesis files are in ./tests/precompile/genesis/
+	// with the name {precompile_name}.json
+	genesisFiles, err := utils.GetFilesAndAliases("./tests/precompile/genesis/*.json")
+	if err != nil {
+		ginkgo.AbortSuite("Failed to get genesis files: " + err.Error())
+	}
+	if len(genesisFiles) == 0 {
+		ginkgo.AbortSuite("No genesis files found")
+	}
+	subnetsSuite := utils.CreateSubnetsSuite(genesisFiles)
 	*/
-})
+	_ = ginkgo.Describe("[Asynchronized Precompile Tests]", func() {
+		// Register the ping test first
+		utils.RegisterPingTest()
+		// ADD YOUR PRECOMPILE HERE
+		/*
+			ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
+				ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+				defer cancel()
+
+				// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
+				// and the test file in ./contracts/tests/{your_precompile}.ts
+				runDefaultHardhatTests(ctx, "your_precompile")
+			})
+		*/
+	})
+}
+
+/* Uncomment this if you want to use default hardhat tests
+//	Default parameters are:
+//
+// 1. Hardhat contract environment is located at ./contracts
+// 2. Hardhat test file is located at ./contracts/test/<test>.ts
+// 3. npx is available in the ./contracts directory
+func runDefaultHardhatTests(ctx context.Context, blockchainID, testName string) {
+	cmdPath := "./contracts"
+	// test path is relative to the cmd path
+	testPath := fmt.Sprintf("./test/%s.ts", testName)
+	utils.RunHardhatTests(ctx, blockchainID, cmdPath, testPath)
+}
+*/
