@@ -12,8 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	// Import the solidity package, so that ginkgo maps out the tests declared within the package
-	_ "github.com/ava-labs/precompile-evm/tests/precompile/solidity"
-	"github.com/ava-labs/subnet-evm/tests/precompile/solidity"
+	"github.com/ava-labs/precompile-evm/tests/precompile/solidity"
 )
 
 func TestE2E(t *testing.T) {
