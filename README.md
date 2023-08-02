@@ -25,3 +25,10 @@ You can create contract tests in `contracts/test` with the Hardhat test framewor
 ## Changing Versions
 
 In order to upgrade the Subnet-EVM version, you need to change the version in `go.mod` and `scripts/versions.sh`. You can also change the AvalancheGo version through `scripts/versions.sh` as well. Then you can run `./scripts/build.sh` to build the plugin with the new version.
+
+## AvalancheGo Compatibility
+
+```text
+[v0.1.0-v0.1.1] AvalancheGo@v1.10.1-v1.10.4 (Protocol Version: 26)
+[v0.1.2] AvalancheGo@v1.10.5 (Protocol Version: 27)
+```
