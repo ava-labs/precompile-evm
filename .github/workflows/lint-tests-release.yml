@@ -36,7 +36,7 @@ jobs:
           check-latest: true
       - run: go mod download
         shell: bash
-      - run: ./scripts/build.sh ./build/subnetevm
+      - run: ./scripts/build.sh ./build/precompile-evm
         shell: bash
       - run: ./scripts/build_test.sh -race
         shell: bash
