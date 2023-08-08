@@ -21,25 +21,35 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		// 8081,
-		// 9652,
-		// 9654,
-		// 9656,
-		// 9658
+		8080,
+		8081,
+		9650,
+		9652,
+		9654,
+		9656,
+		9658
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
+	"postCreateCommand": "bash scripts/build.sh",
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 
-	// "extensions" : {
-	// 	// ADD THUNDERCLIENT/GO/SOLIDITY
-	// }
 	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/ava-labs/precompile-evm,type=bind",
-	"workspaceFolder": "/go/src/github.com/ava-labs/precompile-evm"
+	"workspaceFolder": "/go/src/github.com/ava-labs/precompile-evm",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+		  "settings": {
+			"solidity.telemetry": false
+		  },
+		  "extensions": [
+			"golang.go",
+		  	"nomicfoundation.hardhat-solidity",
+		  	"rangav.vscode-thunder-client"
+			]
+		}
+	  }
 }
