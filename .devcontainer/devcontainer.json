@@ -39,7 +39,8 @@
 	"customizations": {
 		"vscode": {
 		  "settings": {
-			"solidity.telemetry": false
+			"solidity.telemetry": false,
+			"git.autofetch": true
 		  },
 		  "extensions": [
 			"golang.go",
