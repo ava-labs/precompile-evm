@@ -4,7 +4,8 @@
 	"name": "Avalanche-DevContainer",
 
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"context": "../scripts/"
 	},
 	"runArgs": ["--network=host"],
 
