@@ -1,6 +1,8 @@
 # Use a base image that includes both Go and Node.js, such as the official Go image
 FROM golang:latest
 
+# Derived from ./devcontainer.json
+ARG AVALANCHEGO_VERSION
 
 ENV GOPATH=/go
 ENV PATH=$PATH:$GOPATH/bin
@@ -11,7 +13,7 @@ ENV AVALANCHEGO_PLUGIN_PATH=$GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 # Clone the avalanchego repository
-RUN git clone -b v1.10.5 https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
+RUN git clone -b $AVALANCHEGO_VERSION https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
 
 # Set the working directory to the cloned repository
 WORKDIR $GOPATH/src/github.com/ava-labs/avalanchego

@@ -4,7 +4,10 @@
 	"name": "Avalanche-DevContainer",
 
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"args": {
+			"AVALANCHEGO_VERSION": "v1.10.5"
+		}
 	},
 	"runArgs": ["--network=host"],
 
