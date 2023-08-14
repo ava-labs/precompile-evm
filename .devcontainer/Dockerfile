@@ -6,21 +6,21 @@ ARG AVALANCHEGO_VERSION
 
 ENV GOPATH=/go
 ENV PATH=$PATH:$GOPATH/bin
-ENV AVALANCHEGO_EXEC_PATH=$GOPATH/src/github.com/ava-labs/avalanchego/build/avalanchego
 ENV AVALANCHEGO_PLUGIN_PATH=$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins
 
 # Install Node.js and npm using the official Node.js image
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
-# Clone the avalanchego repository
-RUN git clone -b $AVALANCHEGO_VERSION https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
+WORKDIR /
 
-# Set the working directory to the cloned repository
-WORKDIR $GOPATH/src/github.com/ava-labs/avalanchego
+# # Download AvalancheGo Binary
+RUN curl -LJO https://github.com/ava-labs/avalanchego/releases/download/v1.10.5/avalanchego-linux-amd64-v1.10.5.tar.gz
+RUN tar -xzf avalanchego-linux-amd64-v1.10.5.tar.gz
+RUN mv avalanchego-v1.10.5 avalanchego
 
-# Build the avalanchego project using the sh script
-RUN ./scripts/build.sh
+ENV AVALANCHEGO_EXEC_PATH=/avalanchego/avalanchego
 
+# Install Avalanche Network Runner
 RUN curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 
 ENV PATH ~/bin:$PATH
