@@ -4,7 +4,11 @@ Precompile-EVM is a repository for registering precompiles to Subnet-EVM without
 
 ## Environment Setup
 
-To effectively build, run and test a Precompile-EVM, you need software such as golang, node,[AvalancheGo](https://github.com/ava-labs/avalanchego), and [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner). 
+To effectively build, run, and test Precompile-EVM, the following is a (non-exhaustive) list of dependencies that you will need:
+- Golang
+- Node.js
+- [AvalancheGo](https://github.com/ava-labs/avalanchego)
+- [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner)
 
 To get started easily, we provide a Dev Container specification, that can be used using GitHub Codespace or locally using Docker and VS Code. DevContainers are a concept that utilizes containerization (via Docker containers) to create consistent and isolated development environment. We can access this environment through VS code, so it will not feel very different from the local development.
 
