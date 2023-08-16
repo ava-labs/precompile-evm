@@ -22,6 +22,10 @@ In order to run the Dev Container locally:
 - Clone the Repository
 - Open the Container by issuing the Command "Dev Containers: Reopen in Container" in the VS Code command palette (Cmd + Shift + P).
 
+## Learn about Precompile-EVM
+
+To get a comprehensive introduction to Precompile-EVM, take the Avalanche Academy course [Customize the EVM](https://academy.avax.com/course/customize-evm).
+
 ## How to use
 
 There is an example branch [hello-world-example](https://github.com/ava-labs/precompile-evm/tree/hello-world-example) in this repository. You can check the example branch to see how to register precompiles and test them.
