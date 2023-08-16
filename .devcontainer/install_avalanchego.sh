@@ -1,6 +1,5 @@
 #!/bin/bash
 # Pulls latest pre-built node binary from GitHub
-# Context of container, NOT local workspace
 
 #stop on errors
 set -e
@@ -60,6 +59,7 @@ else
   exit
 fi
 
+# Define architecture
 foundArch="$(uname -m)" 
 
 if [ "$foundArch" = "aarch64" ]; then
@@ -80,14 +80,8 @@ fi
 
 # Import environment variables
 source ./versions.sh
-echo $AVALANCHEGO_VERSION
-echo $getArch
-echo "PRINTED AGO VERSION!"
 
 # Download AvalancheGo binary
-echo "https://github.com/ava-labs/avalanchego/releases/download/$AVALANCHEGO_VERSION/avalanchego-linux-$getArch-$AVALANCHEGO_VERSION.tar.gz"
 curl -LJ -o avalanchego.tar.gz "https://github.com/ava-labs/avalanchego/releases/download/$AVALANCHEGO_VERSION/avalanchego-linux-$getArch-$AVALANCHEGO_VERSION.tar.gz"
-echo "DOWNLOADED TAR FILE"
 tar -xzf avalanchego.tar.gz --wildcards '*/avalanchego' --strip-components=1 -C /avalanchego
-echo "TARRED THE FILE!"
 rm avalanchego.tar.gz

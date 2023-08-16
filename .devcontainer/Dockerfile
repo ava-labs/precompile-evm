@@ -8,11 +8,11 @@ ENV AVALANCHEGO_PLUGIN_PATH=$GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 # Download AvalancheGo Binary
 WORKDIR /
 COPY ./scripts/versions.sh /
-COPY ./.devcontainer/install.sh /
+COPY ./.devcontainer/install_avalanchego.sh /
 
 ENV AVALANCHEGO_EXEC_PATH=/avalanchego
 
-RUN bash -c "source ./install.sh"
+RUN bash -c "source ./install_avalanchego.sh"
 
 # Install Node.js and npm using the official Node.js image
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
