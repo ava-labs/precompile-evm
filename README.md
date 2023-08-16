@@ -10,7 +10,7 @@ To effectively build, run, and test Precompile-EVM, the following is a (non-exha
 - [AvalancheGo](https://github.com/ava-labs/avalanchego)
 - [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner)
 
-To get started easily, we provide a Dev Container specification, that can be used using GitHub Codespace or locally using Docker and VS Code. DevContainers are a concept that utilizes containerization (via Docker containers) to create consistent and isolated development environment. We can access this environment through VS code, so it will not feel very different from the local development.
+To get started easily, we provide a Dev Container specification, that can be used using GitHub Codespace or locally using Docker and VS Code. DevContainers are a concept that utilizes containerization (via Docker containers) to create consistent and isolated development environment. We can access this environment through VS code, which allows for the development experience to feel as if you were developing locally..
 
 ### Dev Container in Codespace
 
