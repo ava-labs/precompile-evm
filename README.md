@@ -16,7 +16,7 @@ To get started easily, we provide a Dev Container specification, that can be use
 
 Codespaces is a development environment service offered by GitHub that allows developers to write, run, test, and debug their code directly on a cloud machine provided by GitHub. The developer can edit the code through a VS Code running in the browser or locally.
 
-To run a Codespace click on the **Code** and switch to the **Codespaces** tab. There click **Create Codespace on branch [...]**. 
+To run a Codespace click on the **Code** and switch to the **Codespaces** tab. There, click **Create Codespace on branch [...]**. 
 
 ### Local Dev Container
 
