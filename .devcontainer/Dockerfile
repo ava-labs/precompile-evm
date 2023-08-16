@@ -14,9 +14,6 @@ ENV AVALANCHEGO_EXEC_PATH=/avalanchego
 
 RUN bash -c "source ./install_avalanchego.sh"
 
-# Install Node.js and npm using the official Node.js image
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
-
 # Install Avalanche Network Runner
 RUN curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
 
