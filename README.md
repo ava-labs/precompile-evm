@@ -24,7 +24,7 @@ In order to run the Dev Container locally:
 
 - Install VS Code, Docker and the [Dev Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - Clone the Repository
-- Open the Container by issuing the Command "Dev Containers: Reopen in Container" in the VS Code command palette (Cmd + Shift + P).
+- Open the Container by issuing the Command "Dev Containers: Reopen in Container" in the VS Code command palette (on Mac-OS, run [Cmd + Shift + P]).
 
 ## Learn about Precompile-EVM
 
