@@ -2,6 +2,34 @@
 
 Precompile-EVM is a repository for registering precompiles to Subnet-EVM without forking the Subnet-EVM codebase. Subnet-EVM supports registering external precompiles through `precompile/modules` package. By importing Subnet-EVM as a library, you can register your own precompiles to Subnet-EVM and build it together with Subnet-EVM.
 
+## Environment Setup
+
+To effectively build, run, and test Precompile-EVM, the following is a (non-exhaustive) list of dependencies that you will need:
+- Golang
+- Node.js
+- [AvalancheGo](https://github.com/ava-labs/avalanchego)
+- [Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner)
+
+To get started easily, we provide a Dev Container specification, that can be used using GitHub Codespace or locally using Docker and VS Code. DevContainers are a concept that utilizes containerization (via Docker containers) to create consistent and isolated development environment. We can access this environment through VS code, which allows for the development experience to feel as if you were developing locally..
+
+### Dev Container in Codespace
+
+Codespaces is a development environment service offered by GitHub that allows developers to write, run, test, and debug their code directly on a cloud machine provided by GitHub. The developer can edit the code through a VS Code running in the browser or locally.
+
+To run a Codespace click on the **Code** and switch to the **Codespaces** tab. There, click **Create Codespace on branch [...]**. 
+
+### Local Dev Container
+
+In order to run the Dev Container locally:
+
+- Install VS Code, Docker and the [Dev Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- Clone the Repository
+- Open the Container by issuing the Command "Dev Containers: Reopen in Container" in the VS Code command palette (on Mac-OS, run [Cmd + Shift + P]).
+
+## Learn about Precompile-EVM
+
+To get a comprehensive introduction to Precompile-EVM, take the Avalanche Academy course on [Customizing the EVM](https://academy.avax.com/course/customize-evm).
+
 ## How to use
 
 There is an example branch [hello-world-example](https://github.com/ava-labs/precompile-evm/tree/hello-world-example) in this repository. You can check the example branch to see how to register precompiles and test them.
@@ -25,14 +53,6 @@ You can create contract tests in `contracts/test` with the Hardhat test framewor
 ## Changing Versions
 
 In order to upgrade the Subnet-EVM version, you need to change the version in `go.mod` and `scripts/versions.sh`. You can also change the AvalancheGo version through `scripts/versions.sh` as well. Then you can run `./scripts/build.sh` to build the plugin with the new version.
-
-Furthermore, for developers using the provided DevContainer, you will also need to change the version of AvalancheGo built by the container. This can be done by modifying the following line in `.devcontainer/Dockerfile`:
-
-```
-RUN git clone -b v1.10.5 https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
-```
-
-In particular, you will want to change `v.1.10.5` to whichever version of AvalancheGo you want to change to.
 
 ## AvalancheGo Compatibility
 
