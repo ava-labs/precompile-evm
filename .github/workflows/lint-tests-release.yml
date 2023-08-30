@@ -60,8 +60,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      - name: NPM install
+      - name: NPM Clean Install
         run: npm ci
+        working-directory: ./contracts
+      - name: Hardhat Clean
+        run: npx hardhat clean
+        working-directory: ./contracts
+      - name: Hardhat Compile
+        run: npx hardhat compile
         working-directory: ./contracts
       - name: Install AvalancheGo Release
         shell: bash
