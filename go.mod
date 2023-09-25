@@ -3,7 +3,7 @@ module github.com/ava-labs/precompile-evm
 go 1.19
 
 require (
-	github.com/ava-labs/avalanchego v1.10.9
+	github.com/ava-labs/avalanchego v1.10.11
 	github.com/ava-labs/subnet-evm v0.5.5
 	github.com/onsi/ginkgo/v2 v2.8.1
 	github.com/onsi/gomega v1.26.0
@@ -42,6 +42,7 @@ require (
 	github.com/golang/snappy v0.0.5-0.20220116011046-fa5810519dcb // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/pprof v0.0.0-20230207041349-798e818bf904 // indirect
+	github.com/google/renameio/v2 v2.0.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/rpc v1.2.0 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
