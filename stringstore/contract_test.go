@@ -5,6 +5,7 @@
 package stringstore
 
 import (
+	"math/big"
 	"testing"
 
 	"github.com/ava-labs/subnet-evm/core/state"
@@ -12,6 +13,13 @@ import (
 	"github.com/ava-labs/subnet-evm/vmerrs"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
+)
+
+var (
+	_ = vmerrs.ErrOutOfGas
+	_ = big.NewInt
+	_ = common.Big0
+	_ = require.New
 )
 
 // These tests are run against the precompile contract directly with
@@ -38,6 +46,7 @@ var (
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
 				var testInput string
+				testInput = ""
 				input, err := PackSetString(testInput)
 				require.NoError(t, err)
 				return input
@@ -52,6 +61,7 @@ var (
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
 				var testInput string
+				testInput = ""
 				input, err := PackSetString(testInput)
 				require.NoError(t, err)
 				return input

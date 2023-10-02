@@ -12,6 +12,7 @@ import (
 
 	"github.com/ava-labs/subnet-evm/accounts/abi"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
+	"github.com/ava-labs/subnet-evm/vmerrs"
 
 	_ "embed"
 
@@ -32,6 +33,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -70,6 +73,17 @@ func PackHashWithMD5Output(hash [16]byte) ([]byte, error) {
 	return Md5ABI.PackOutput("hashWithMD5", hash)
 }
 
+// UnpackHashWithMD5Output attempts to unpack given [output] into the [16]byte type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackHashWithMD5Output(output []byte) ([16]byte, error) {
+	res, err := Md5ABI.Unpack("hashWithMD5", output)
+	if err != nil {
+		return [16]byte{}, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([16]byte)).(*[16]byte)
+	return unpacked, nil
+}
+
 func hashWithMD5(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, HashWithMD5GasCost); err != nil {
 		return nil, 0, err
@@ -83,8 +97,9 @@ func hashWithMD5(accessibleState contract.AccessibleState, caller common.Address
 	}
 
 	// CUSTOM CODE STARTS HERE
-	var output [16]byte // CUSTOM CODE FOR AN OUTPUT
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
 
+	var output [16]byte // CUSTOM CODE FOR AN OUTPUT
 	output = md5.Sum([]byte(inputStruct))
 
 	packedOutput, err := PackHashWithMD5Output(output)
