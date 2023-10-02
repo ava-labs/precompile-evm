@@ -5,13 +5,13 @@
 package sha256
 
 import (
-	"crypto/sha256"
 	"errors"
 	"fmt"
 	"math/big"
 
 	"github.com/ava-labs/subnet-evm/accounts/abi"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
+	"github.com/ava-labs/subnet-evm/vmerrs"
 
 	_ "embed"
 
@@ -32,6 +32,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -70,6 +72,17 @@ func PackHashWithSHA256Output(hash [32]byte) ([]byte, error) {
 	return Sha256ABI.PackOutput("hashWithSHA256", hash)
 }
 
+// UnpackHashWithSHA256Output attempts to unpack given [output] into the [32]byte type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackHashWithSHA256Output(output []byte) ([32]byte, error) {
+	res, err := Sha256ABI.Unpack("hashWithSHA256", output)
+	if err != nil {
+		return [32]byte{}, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([32]byte)).(*[32]byte)
+	return unpacked, nil
+}
+
 func hashWithSHA256(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, HashWithSHA256GasCost); err != nil {
 		return nil, 0, err
@@ -83,10 +96,9 @@ func hashWithSHA256(accessibleState contract.AccessibleState, caller common.Addr
 	}
 
 	// CUSTOM CODE STARTS HERE
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+
 	var output [32]byte // CUSTOM CODE FOR AN OUTPUT
-
-	output = sha256.Sum256([]byte(inputStruct))
-
 	packedOutput, err := PackHashWithSHA256Output(output)
 	if err != nil {
 		return nil, remainingGas, err
