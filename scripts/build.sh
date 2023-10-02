@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-go_version_minimum="1.19.6"
+go_version_minimum="1.20.8"
 
 go_version() {
     go version | sed -nE -e 's/[^0-9.]+([0-9.]+).+/\1/p'
@@ -23,7 +23,7 @@ version_lt() {
 }
 
 if version_lt "$(go_version)" "$go_version_minimum"; then
-    echo "SubnetEVM requires Go >= $go_version_minimum, Go $(go_version) found." >&2
+    echo "Precompile-EVM requires Go >= $go_version_minimum, Go $(go_version) found." >&2
     exit 1
 fi
 
@@ -44,10 +44,10 @@ if [[ $# -eq 1 ]]; then
 elif [[ $# -eq 0 ]]; then
     BINARY_PATH="$GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"
 else
-    echo "Invalid arguments to build subnet-evm. Requires zero (default location) or one argument to specify binary location."
+    echo "Invalid arguments to build precompile-evm. Requires zero (default location) or one argument to specify binary location."
     exit 1
 fi
 
 # Build Subnet EVM, which is run as a subprocess
-echo "Building Subnet-EVM version: $SUBNET_EVM_VERSION with Precompile at $BINARY_PATH"
+echo "Building Precompile-EVM with Subnet-EVM version: $SUBNET_EVM_VERSION at $BINARY_PATH"
 go build -ldflags "-X github.com/ava-labs/subnet-evm/plugin/evm.Version=$SUBNET_EVM_VERSION $STATIC_LD_FLAGS" -o "$BINARY_PATH" "plugin/"*.go
