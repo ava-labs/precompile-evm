@@ -5,7 +5,6 @@
 package stringstore
 
 import (
-
 	"github.com/ava-labs/subnet-evm/precompile/precompileconfig"
 )
 
@@ -17,7 +16,6 @@ type Config struct {
 	precompileconfig.Upgrade
 	// CUSTOM CODE STARTS HERE
 	// Add your own custom fields for Config here
-	DefaultString string `json:"defaultString,omitempty"`
 }
 
 // NewConfig returns a config for a network upgrade at [blockTimestamp] that enables
@@ -44,7 +42,7 @@ func NewDisableConfig(blockTimestamp *uint64) *Config {
 func (*Config) Key() string { return ConfigKey }
 
 // Verify tries to verify Config and returns an error accordingly.
-func (c *Config) Verify(p precompileconfig.ChainConfig) error {
+func (c *Config) Verify(chainConfig precompileconfig.ChainConfig) error {
 	// CUSTOM CODE STARTS HERE
 	// Add your own custom verify code for Config here
 	// and return an error accordingly

@@ -33,6 +33,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -45,8 +47,6 @@ var (
 	StringStoreABI = contract.ParseABI(StringStoreRawABI)
 
 	StringStorePrecompile = createStringStorePrecompile()
-
-	storageKeyHash = common.BytesToHash([]byte("storageKey"))
 )
 
 // PackGetString packs the include selector (first 4 func signature bytes).
@@ -61,12 +61,15 @@ func PackGetStringOutput(value string) ([]byte, error) {
 	return StringStoreABI.PackOutput("getString", value)
 }
 
-// GetString returns the value of the storage key "storageKey" in the contract storage,
-// with leading zeroes trimmed.
-func GetString(stateDB contract.StateDB) string {
-	// Get the value set at recipient
-	value := stateDB.GetState(ContractAddress, storageKeyHash)
-	return string(common.TrimLeftZeroes(value.Bytes()))
+// UnpackGetStringOutput attempts to unpack given [output] into the string type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackGetStringOutput(output []byte) (string, error) {
+	res, err := StringStoreABI.Unpack("getString", output)
+	if err != nil {
+		return "", err
+	}
+	unpacked := *abi.ConvertType(res[0], new(string)).(*string)
+	return unpacked, nil
 }
 
 func getString(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
@@ -78,10 +81,6 @@ func getString(accessibleState contract.AccessibleState, caller common.Address, 
 	// CUSTOM CODE STARTS HERE
 
 	var output string // CUSTOM CODE FOR AN OUTPUT
-
-	currentState := accessibleState.GetStateDB()
-	output = GetString(currentState)
-
 	packedOutput, err := PackGetStringOutput(output)
 	if err != nil {
 		return nil, remainingGas, err
@@ -109,14 +108,6 @@ func PackSetString(value string) ([]byte, error) {
 	return StringStoreABI.Pack("setString", value)
 }
 
-// StoreString sets the value of the storage key "storageKey" in the contract storage.
-func StoreString(stateDB contract.StateDB, newValue string) {
-	newValuePadded := common.LeftPadBytes([]byte(newValue), common.HashLength)
-	newValueHash := common.BytesToHash(newValuePadded)
-
-	stateDB.SetState(ContractAddress, storageKeyHash, newValueHash)
-}
-
 func setString(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, SetStringGasCost); err != nil {
 		return nil, 0, err
@@ -133,12 +124,7 @@ func setString(accessibleState contract.AccessibleState, caller common.Address, 
 	}
 
 	// CUSTOM CODE STARTS HERE
-	// Get K-V Mapping
-	currentState := accessibleState.GetStateDB()
-
-	// Set the value
-	StoreString(currentState, inputStruct)
-
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
 	// this function does not return an output, leave this one as is
 	packedOutput := []byte{}
 
