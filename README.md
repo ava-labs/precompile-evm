@@ -5,6 +5,7 @@ Precompile-EVM is a repository for registering precompiles to Subnet-EVM without
 ## Environment Setup
 
 To effectively build, run, and test Precompile-EVM, the following is a (non-exhaustive) list of dependencies that you will need:
+
 - Golang
 - Node.js
 - [AvalancheGo](https://github.com/ava-labs/avalanchego)
@@ -16,7 +17,7 @@ To get started easily, we provide a Dev Container specification, that can be use
 
 Codespaces is a development environment service offered by GitHub that allows developers to write, run, test, and debug their code directly on a cloud machine provided by GitHub. The developer can edit the code through a VS Code running in the browser or locally.
 
-To run a Codespace click on the **Code** and switch to the **Codespaces** tab. There, click **Create Codespace on branch [...]**. 
+To run a Codespace click on the **Code** and switch to the **Codespaces** tab. There, click **Create Codespace on branch [...]**.
 
 ### Local Dev Container
 
@@ -59,5 +60,6 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 ```text
 [v0.1.0-v0.1.1] AvalancheGo@v1.10.1-v1.10.4 (Protocol Version: 26)
 [v0.1.2] AvalancheGo@v1.10.5-v1.10.8 (Protocol Version: 27)
-[v0.1.3] AvalancheGo@v1.10.9 (Protocol Version: 28)
+[v0.1.3] AvalancheGo@v1.10.9-v1.10.11 (Protocol Version: 28)
+[v0.1.4] AvalancheGo@v1.10.9-v1.10.11 (Protocol Version: 28)
 ```
