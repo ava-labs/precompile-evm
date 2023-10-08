@@ -11,6 +11,7 @@ import (
 
 	"github.com/ava-labs/subnet-evm/accounts/abi"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
+	"github.com/ava-labs/subnet-evm/vmerrs"
 
 	_ "embed"
 
@@ -33,6 +34,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -96,6 +99,15 @@ func PackModuloPlusOutput(outputStruct ModuloPlusOutput) ([]byte, error) {
 	)
 }
 
+// UnpackModuloPlusOutput attempts to unpack [output] as ModuloPlusOutput
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackModuloPlusOutput(output []byte) (ModuloPlusOutput, error) {
+	outputStruct := ModuloPlusOutput{}
+	err := CalculatorplusABI.UnpackIntoInterface(&outputStruct, "moduloPlus", output)
+
+	return outputStruct, err
+}
+
 func moduloPlus(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, ModuloPlusGasCost); err != nil {
 		return nil, 0, err
@@ -109,9 +121,17 @@ func moduloPlus(accessibleState contract.AccessibleState, caller common.Address,
 	}
 
 	// CUSTOM CODE STARTS HERE
+	//_ = inputStruct             // CUSTOM CODE OPERATES ON INPUT
 	var output ModuloPlusOutput // CUSTOM CODE FOR AN OUTPUT
 
-	output.Multiple, output.Remainder = big.NewInt(0).DivMod(inputStruct.Dividend, inputStruct.Divisor, output.Remainder)
+	if inputStruct.Divisor.Cmp(big.NewInt(0)) == 0 {
+		// Handle the case where the divisor is zero
+		output.Multiple = big.NewInt(0)
+		output.Remainder = big.NewInt(0)
+	} else {
+		// Perform the division and modulo operation
+		output.Multiple, output.Remainder = new(big.Int).DivMod(inputStruct.Dividend, inputStruct.Divisor, new(big.Int))
+	}
 
 	packedOutput, err := PackModuloPlusOutput(output)
 	if err != nil {
@@ -127,7 +147,7 @@ func moduloPlus(accessibleState contract.AccessibleState, caller common.Address,
 func UnpackPowOfThreeInput(input []byte) (*big.Int, error) {
 	res, err := CalculatorplusABI.UnpackInput("powOfThree", input)
 	if err != nil {
-		return big.NewInt(0), err
+		return new(big.Int), err
 	}
 	unpacked := *abi.ConvertType(res[0], new(*big.Int)).(**big.Int)
 	return unpacked, nil
@@ -150,6 +170,15 @@ func PackPowOfThreeOutput(outputStruct PowOfThreeOutput) ([]byte, error) {
 	)
 }
 
+// UnpackPowOfThreeOutput attempts to unpack [output] as PowOfThreeOutput
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackPowOfThreeOutput(output []byte) (PowOfThreeOutput, error) {
+	outputStruct := PowOfThreeOutput{}
+	err := CalculatorplusABI.UnpackIntoInterface(&outputStruct, "powOfThree", output)
+
+	return outputStruct, err
+}
+
 func powOfThree(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, PowOfThreeGasCost); err != nil {
 		return nil, 0, err
@@ -163,6 +192,7 @@ func powOfThree(accessibleState contract.AccessibleState, caller common.Address,
 	}
 
 	// CUSTOM CODE STARTS HERE
+	//_ = inputStruct             // CUSTOM CODE OPERATES ON INPUT
 	var output PowOfThreeOutput // CUSTOM CODE FOR AN OUTPUT
 
 	output.SecondPow = big.NewInt(0).Exp(inputStruct, big.NewInt(2), nil)
@@ -201,6 +231,15 @@ func PackSimplFracOutput(outputStruct SimplFracOutput) ([]byte, error) {
 	)
 }
 
+// UnpackSimplFracOutput attempts to unpack [output] as SimplFracOutput
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackSimplFracOutput(output []byte) (SimplFracOutput, error) {
+	outputStruct := SimplFracOutput{}
+	err := CalculatorplusABI.UnpackIntoInterface(&outputStruct, "simplFrac", output)
+
+	return outputStruct, err
+}
+
 func simplFrac(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, SimplFracGasCost); err != nil {
 		return nil, 0, err
@@ -214,6 +253,7 @@ func simplFrac(accessibleState contract.AccessibleState, caller common.Address, 
 	}
 
 	// CUSTOM CODE STARTS HERE
+	//_ = inputStruct            // CUSTOM CODE OPERATES ON INPUT
 	var output SimplFracOutput // CUSTOM CODE FOR AN OUTPUT
 
 	// If denominator is 0, return both 0

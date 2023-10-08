@@ -12,6 +12,7 @@ import (
 
 	"github.com/ava-labs/subnet-evm/accounts/abi"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
+	"github.com/ava-labs/subnet-evm/vmerrs"
 
 	_ "embed"
 
@@ -34,6 +35,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -83,6 +86,17 @@ func PackAddOutput(result *big.Int) ([]byte, error) {
 	return CalculatorABI.PackOutput("add", result)
 }
 
+// UnpackAddOutput attempts to unpack given [output] into the *big.Int type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackAddOutput(output []byte) (*big.Int, error) {
+	res, err := CalculatorABI.Unpack("add", output)
+	if err != nil {
+		return new(big.Int), err
+	}
+	unpacked := *abi.ConvertType(res[0], new(*big.Int)).(**big.Int)
+	return unpacked, nil
+}
+
 func add(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, AddGasCost); err != nil {
 		return nil, 0, err
@@ -96,9 +110,10 @@ func add(accessibleState contract.AccessibleState, caller common.Address, addr c
 	}
 
 	// CUSTOM CODE STARTS HERE
-	var output *big.Int // CUSTOM CODE FOR AN OUTPUT
+	//_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
 
-	output = big.NewInt(0).Add(inputStruct.Value1, inputStruct.Value2)
+	var output *big.Int // CUSTOM CODE FOR AN OUTPUT
+	output = new(big.Int).Add(inputStruct.Value1, inputStruct.Value2)
 
 	packedOutput, err := PackAddOutput(output)
 	if err != nil {
@@ -114,7 +129,7 @@ func add(accessibleState contract.AccessibleState, caller common.Address, addr c
 func UnpackNextTwoInput(input []byte) (*big.Int, error) {
 	res, err := CalculatorABI.UnpackInput("nextTwo", input)
 	if err != nil {
-		return big.NewInt(0), err
+		return new(big.Int), err
 	}
 	unpacked := *abi.ConvertType(res[0], new(*big.Int)).(**big.Int)
 	return unpacked, nil
@@ -136,6 +151,15 @@ func PackNextTwoOutput(outputStruct NextTwoOutput) ([]byte, error) {
 	)
 }
 
+// UnpackNextTwoOutput attempts to unpack [output] as NextTwoOutput
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackNextTwoOutput(output []byte) (NextTwoOutput, error) {
+	outputStruct := NextTwoOutput{}
+	err := CalculatorABI.UnpackIntoInterface(&outputStruct, "nextTwo", output)
+
+	return outputStruct, err
+}
+
 func nextTwo(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, NextTwoGasCost); err != nil {
 		return nil, 0, err
@@ -149,10 +173,10 @@ func nextTwo(accessibleState contract.AccessibleState, caller common.Address, ad
 	}
 
 	// CUSTOM CODE STARTS HERE
+	//_ = inputStruct          // CUSTOM CODE OPERATES ON INPUT
 	var output NextTwoOutput // CUSTOM CODE FOR AN OUTPUT
-
-	output.Result1 = big.NewInt(0).Add(inputStruct, big.NewInt(1))
-	output.Result2 = big.NewInt(0).Add(inputStruct, big.NewInt(2))
+	output.Result1 = new(big.Int).Add(inputStruct, big.NewInt(1))
+	output.Result2 = new(big.Int).Add(inputStruct, big.NewInt(2))
 
 	packedOutput, err := PackNextTwoOutput(output)
 	if err != nil {
@@ -183,6 +207,17 @@ func PackRepeatOutput(result string) ([]byte, error) {
 	return CalculatorABI.PackOutput("repeat", result)
 }
 
+// UnpackRepeatOutput attempts to unpack given [output] into the string type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackRepeatOutput(output []byte) (string, error) {
+	res, err := CalculatorABI.Unpack("repeat", output)
+	if err != nil {
+		return "", err
+	}
+	unpacked := *abi.ConvertType(res[0], new(string)).(*string)
+	return unpacked, nil
+}
+
 func repeat(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
 	if remainingGas, err = contract.DeductGas(suppliedGas, RepeatGasCost); err != nil {
 		return nil, 0, err
@@ -196,8 +231,9 @@ func repeat(accessibleState contract.AccessibleState, caller common.Address, add
 	}
 
 	// CUSTOM CODE STARTS HERE
-	var output string // CUSTOM CODE FOR AN OUTPUT
+	//_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
 
+	var output string // CUSTOM CODE FOR AN OUTPUT
 	output = strings.Repeat(inputStruct.Text, int(inputStruct.Times.Int64()))
 
 	packedOutput, err := PackRepeatOutput(output)
