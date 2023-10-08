@@ -15,6 +15,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+var (
+	_ = vmerrs.ErrOutOfGas
+	_ = big.NewInt
+	_ = common.Big0
+	_ = require.New
+)
+
 // These tests are run against the precompile contract directly with
 // the given input and expected output. They're just a guide to
 // help you write your own tests. These tests are for general cases like
@@ -60,7 +67,8 @@ var (
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
-				var testInput = big.NewInt(1)
+				var testInput *big.Int
+				testInput = new(big.Int)
 				input, err := PackSetCounter(testInput)
 				require.NoError(t, err)
 				return input
@@ -74,7 +82,8 @@ var (
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
-				var testInput = big.NewInt(1)
+				var testInput *big.Int
+				testInput = new(big.Int)
 				input, err := PackSetCounter(testInput)
 				require.NoError(t, err)
 				return input

@@ -26,7 +26,6 @@ const (
 	GetCounterGasCost       uint64 = 1 /* SET A GAS COST HERE */
 	IncrementCounterGasCost uint64 = 1 /* SET A GAS COST HERE */
 	SetCounterGasCost       uint64 = 1 /* SET A GAS COST HERE */
-
 )
 
 // CUSTOM CODE STARTS HERE
@@ -35,6 +34,8 @@ var (
 	_ = abi.JSON
 	_ = errors.New
 	_ = big.NewInt
+	_ = vmerrs.ErrOutOfGas
+	_ = common.Big0
 )
 
 // Singleton StatefulPrecompiledContract and signatures.
@@ -78,6 +79,17 @@ func PackGetCounter() ([]byte, error) {
 // to conform the ABI outputs.
 func PackGetCounterOutput(value *big.Int) ([]byte, error) {
 	return CounterABI.PackOutput("getCounter", value)
+}
+
+// UnpackGetCounterOutput attempts to unpack given [output] into the *big.Int type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackGetCounterOutput(output []byte) (*big.Int, error) {
+	res, err := CounterABI.Unpack("getCounter", output)
+	if err != nil {
+		return new(big.Int), err
+	}
+	unpacked := *abi.ConvertType(res[0], new(*big.Int)).(**big.Int)
+	return unpacked, nil
 }
 
 func getCounter(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
