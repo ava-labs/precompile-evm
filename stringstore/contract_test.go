@@ -46,7 +46,6 @@ var (
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
 				var testInput string
-				testInput = ""
 				input, err := PackSetString(testInput)
 				require.NoError(t, err)
 				return input
@@ -61,7 +60,6 @@ var (
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
 				var testInput string
-				testInput = ""
 				input, err := PackSetString(testInput)
 				require.NoError(t, err)
 				return input
