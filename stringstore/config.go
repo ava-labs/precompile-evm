@@ -16,6 +16,7 @@ type Config struct {
 	precompileconfig.Upgrade
 	// CUSTOM CODE STARTS HERE
 	// Add your own custom fields for Config here
+	DefaultString string `json:"defaultString,omitempty"`
 }
 
 // NewConfig returns a config for a network upgrade at [blockTimestamp] that enables
