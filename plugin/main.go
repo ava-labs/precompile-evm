@@ -14,8 +14,8 @@ import (
 	// that registers the precompile with the subnet-evm. Importing the precompile package here
 	// will cause the precompile to be registered with the subnet-evm.
 	_ "github.com/ava-labs/precompile-evm/calculator"
-	_ "github.com/ava-labs/precompile-evm/calculatorplus"
 	_ "github.com/ava-labs/precompile-evm/sha256"
+	_ "github.com/ava-labs/precompile-evm/stringstore"
 )
 
 const Version = "v0.1.4"

@@ -47,7 +47,26 @@ var (
 	StringStoreABI = contract.ParseABI(StringStoreRawABI)
 
 	StringStorePrecompile = createStringStorePrecompile()
+
+	// Key that defines where our string will be stored
+	storageKeyHash = common.BytesToHash([]byte("storageKey"))
 )
+
+// StoreString sets the value of the storage key "storageKey" in the contract storage.
+func StoreString(stateDB contract.StateDB, newValue string) {
+	newValuePadded := common.LeftPadBytes([]byte(newValue), common.HashLength)
+	newValueHash := common.BytesToHash(newValuePadded)
+
+	stateDB.SetState(ContractAddress, storageKeyHash, newValueHash)
+}
+
+// GetString returns the value of the storage key "storageKey" in the contract storage,
+// with leading zeroes trimmed.
+func GetString(stateDB contract.StateDB) string {
+	// Get the value set at recipient
+	value := stateDB.GetState(ContractAddress, storageKeyHash)
+	return string(common.TrimLeftZeroes(value.Bytes()))
+}
 
 // PackGetString packs the include selector (first 4 func signature bytes).
 // This function is mostly used for tests.
@@ -81,6 +100,10 @@ func getString(accessibleState contract.AccessibleState, caller common.Address, 
 	// CUSTOM CODE STARTS HERE
 
 	var output string // CUSTOM CODE FOR AN OUTPUT
+
+	currentState := accessibleState.GetStateDB()
+	output = GetString(currentState)
+
 	packedOutput, err := PackGetStringOutput(output)
 	if err != nil {
 		return nil, remainingGas, err
@@ -124,7 +147,13 @@ func setString(accessibleState contract.AccessibleState, caller common.Address, 
 	}
 
 	// CUSTOM CODE STARTS HERE
-	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+	//_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+	// Get K-V Mapping
+	currentState := accessibleState.GetStateDB()
+
+	// Set the value
+	StoreString(currentState, inputStruct)
+
 	// this function does not return an output, leave this one as is
 	packedOutput := []byte{}
 

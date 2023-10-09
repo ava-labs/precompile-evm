@@ -59,5 +59,7 @@ func (*configurator) Configure(chainConfig precompileconfig.ChainConfig, cfg pre
 		return fmt.Errorf("incorrect config %T: %v", config, config)
 	}
 	// CUSTOM CODE STARTS HERE
+	StoreString(state, config.DefaultString)
+
 	return nil
 }
