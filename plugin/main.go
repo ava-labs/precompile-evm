@@ -15,6 +15,7 @@ import (
 	// will cause the precompile to be registered with the subnet-evm.
 	_ "github.com/ava-labs/precompile-evm/md5"
 	_ "github.com/ava-labs/precompile-evm/sha256"
+	_ "github.com/ava-labs/precompile-evm/stringstore"
 )
 
 const Version = "v0.1.4"
