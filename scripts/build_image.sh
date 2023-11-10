@@ -16,8 +16,10 @@ source "$ROOT_DIR_PATH"/scripts/versions.sh
 # Load the constants
 source "$ROOT_DIR_PATH"/scripts/constants.sh
 
-echo "Building Docker Image: $DOCKERHUB_REPO:$BUILD_IMAGE_ID based of $AVALANCHEGO_VERSION"
+BUILD_IMAGE_ID=${BUILD_IMAGE_ID:-"$AVALANCHE_VERSION-$PRECOMPILE_COMMIT_ID"}
+
+echo "Building Docker Image: $DOCKERHUB_REPO:$BUILD_IMAGE_ID based of $AVALANCHE_VERSION"
 docker build -t "$DOCKERHUB_REPO:$BUILD_IMAGE_ID" "$ROOT_DIR_PATH" -f "$ROOT_DIR_PATH/Dockerfile" \
-  --build-arg AVALANCHE_VERSION="$AVALANCHEGO_VERSION" \
+  --build-arg AVALANCHE_VERSION="$AVALANCHE_VERSION" \
   --build-arg PRECOMPILE_COMMIT="$PRECOMPILE_COMMIT" \
   --build-arg CURRENT_BRANCH="$CURRENT_BRANCH"
