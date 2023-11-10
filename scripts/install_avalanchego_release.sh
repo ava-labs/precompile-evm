@@ -11,7 +11,7 @@ source "$ROOT_DIR_PATH"/scripts/versions.sh
 # Load the constants
 source "$ROOT_DIR_PATH"/scripts/constants.sh
 
-VERSION=$AVALANCHEGO_VERSION
+VERSION=$AVALANCHE_VERSION
 
 ############################
 # download avalanchego
