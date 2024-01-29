@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set up the versions to be used - populate ENV variables only if they are not already populated
-SUBNET_EVM_VERSION=${SUBNET_EVM_VERSION:-'v0.5.10'}
+SUBNET_EVM_VERSION=${SUBNET_EVM_VERSION:-'v0.5.11'}
 # Don't export them as they're used in the context of other calls
-AVALANCHE_VERSION=${AVALANCHE_VERSION:-'v1.10.17'}
+AVALANCHE_VERSION=${AVALANCHE_VERSION:-'v1.10.18'}
 GINKGO_VERSION=${GINKGO_VERSION:-'v2.2.0'}
