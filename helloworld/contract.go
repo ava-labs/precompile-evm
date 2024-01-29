@@ -106,7 +106,7 @@ func sayHello(accessibleState contract.AccessibleState, caller common.Address, a
 // UnpackSetGreetingInput attempts to unpack [input] into the string type argument
 // assumes that [input] does not include selector (omits first 4 func signature bytes)
 func UnpackSetGreetingInput(input []byte) (string, error) {
-	res, err := HelloWorldABI.UnpackInput("setGreeting", input)
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input, false)
 	if err != nil {
 		return "", err
 	}
