@@ -3,8 +3,8 @@ module github.com/ava-labs/precompile-evm
 go 1.20
 
 require (
-	github.com/ava-labs/avalanchego v1.10.18
-	github.com/ava-labs/subnet-evm v0.5.11
+	github.com/ava-labs/avalanchego v1.11.0-fuji
+	github.com/ava-labs/subnet-evm v0.6.0-fuji
 	github.com/ethereum/go-ethereum v1.12.0
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.29.0
@@ -110,6 +110,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.11.0 // indirect
 	go.opentelemetry.io/otel/trace v1.11.0 // indirect
 	go.opentelemetry.io/proto/otlp v0.19.0 // indirect
+	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
