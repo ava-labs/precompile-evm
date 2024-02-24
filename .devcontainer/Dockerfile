@@ -1,5 +1,5 @@
 # Use a base image that includes both Go and Node.js, such as the official Go image
-FROM golang:1.20.12-bullseye
+FROM golang:1.21.7-bullseye
 
 
 ENV GOPATH=/go
