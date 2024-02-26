@@ -5,6 +5,7 @@ go 1.21
 require (
 	github.com/ava-labs/avalanchego v1.11.1
 	github.com/ava-labs/subnet-evm v0.6.1
+	github.com/ethereum/go-ethereum v1.12.0
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.29.0
 	github.com/stretchr/testify v1.8.4
@@ -15,7 +16,7 @@ require (
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/VictoriaMetrics/fastcache v1.10.0 // indirect
-	github.com/ava-labs/coreth v0.12.10-rc.5 // indirect
+	github.com/ava-labs/coreth v0.13.0-rc.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.3 // indirect
@@ -35,6 +36,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gballet/go-libpcsclite v0.0.0-20191108122812-4678299bea08 // indirect
 	github.com/getsentry/sentry-go v0.18.0 // indirect
+	github.com/go-cmd/cmd v1.4.1 // indirect
 	github.com/go-logr/logr v1.3.0 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
@@ -44,6 +46,7 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.5-0.20220116011046-fa5810519dcb // indirect
+	github.com/google/btree v1.1.2 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20230207041349-798e818bf904 // indirect
 	github.com/google/renameio/v2 v2.0.0 // indirect
@@ -107,7 +110,6 @@ require (
 	go.opentelemetry.io/otel/sdk v1.11.0 // indirect
 	go.opentelemetry.io/otel/trace v1.11.0 // indirect
 	go.opentelemetry.io/proto/otlp v0.19.0 // indirect
-	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
