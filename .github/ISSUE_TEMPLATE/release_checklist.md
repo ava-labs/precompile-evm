@@ -25,3 +25,4 @@ Link the relevant documentation PRs for this release.
 - [ ] Bump Subnet-EVM version in go.mod and versions.sh
 - [ ] Add new entry in compatibility.json for RPCChainVM Compatibility
 - [ ] Update AvalancheGo compatibility in README
+- [ ] Update hello-world-example branch with latest master, run CI tests
