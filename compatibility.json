@@ -1,5 +1,6 @@
 {
   "rpcChainVMProtocolVersion": {
+    "v0.2.1": 35,
     "v0.2.0": 33,
     "v0.1.8": 31,
     "v0.1.7": 30,
