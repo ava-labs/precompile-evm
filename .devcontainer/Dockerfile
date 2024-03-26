@@ -10,7 +10,7 @@ ENV AVALANCHEGO_PLUGIN_PATH=$GOPATH/src/github.com/ava-labs/avalanchego/build/pl
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 # Clone the avalanchego repository
-RUN git clone -b v1.11.1 https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
+RUN git clone -b v1.11.3 https://github.com/ava-labs/avalanchego.git $GOPATH/src/github.com/ava-labs/avalanchego
 
 # Set the working directory to the cloned repository
 WORKDIR $GOPATH/src/github.com/ava-labs/avalanchego
