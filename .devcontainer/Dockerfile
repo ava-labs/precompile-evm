@@ -1,4 +1,5 @@
-FROM avaplatform/avalanchego:v1.11.3 as avalanchego
+ARG AVALANCHEGO_VERSION
+FROM avaplatform/avalanchego:$AVALANCHEGO_VERSION as avalanchego
 FROM mcr.microsoft.com/devcontainers/base
 
 COPY --from=avalanchego /avalanchego/build /go/src/github.com/ava-labs/avalanchego/build
