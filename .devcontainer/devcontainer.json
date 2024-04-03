@@ -41,7 +41,7 @@
 	"postCreateCommand": "bash scripts/build.sh",
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "root",
 
 	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/ava-labs/precompile-evm,type=bind",
 	"workspaceFolder": "/go/src/github.com/ava-labs/precompile-evm",

@@ -10,6 +10,11 @@
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
+    "durangoTimestamp": 0,
+    "warpConfig": {
+      "blockTimestamp": 0,
+      "quorumNumerator": 67
+    },
     "feeConfig": {
       "gasLimit": 15000000,
       "minBaseFee": 25000000000,
