@@ -11,6 +11,12 @@
       "targetBlockRate": 2,
       "blockGasCostStep": 500000
     },
+    "durangoTimestamp": 0,
+    "subnetEVMTimestamp": 0,
+    "warpConfig": {
+      "blockTimestamp": 1710972069,
+      "quorumNumerator": 67
+    },
     "helloWorldConfig": {
       "blockTimestamp": 0,
       "adminAddresses": [
