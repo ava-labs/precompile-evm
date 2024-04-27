@@ -4,15 +4,29 @@
 	"name": "Avalanche-DevContainer",
 
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		"args": {
+			"AVALANCHEGO_VERSION": "v1.11.3"
+		}
 	},
 	"runArgs": ["--network=host"],
+
+	"remoteEnv": {
+		"GOPATH": "/go",
+		"PATH": "${containerEnv:PATH}:${env:GOPATH}/bin:~/bin",
+		"AVALANCHEGO_EXEC_PATH": "${containerEnv:GOPATH}/src/github.com/ava-labs/avalanchego/build/avalanchego",
+		"AVALANCHEGO_PLUGIN_PATH": "${containerEnv:GOPATH}/src/github.com/ava-labs/avalanchego/build/plugins",
+		"PK": "56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
+		"KEYSTORE": "${containerWorkspaceFolder}/keystore"
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": { 
 		"ghcr.io/devcontainers/features/github-cli:1": {
 			"version": "latest"
-		}
+		},
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/go:1": {}
 	 },
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -30,7 +44,7 @@
 	"postCreateCommand": "bash scripts/build.sh",
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "root",
 
 	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/ava-labs/precompile-evm,type=bind",
 	"workspaceFolder": "/go/src/github.com/ava-labs/precompile-evm",
