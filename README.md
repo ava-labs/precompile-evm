@@ -148,6 +148,27 @@ In `plugin/main.go` Subnet-EVM is already imported and ready to be Run from the 
 
 You can build your precompile and Subnet-EVM with `./scripts/build.sh`. This script builds Subnet-EVM, and your precompile together and generates a binary file. The binary file is compatible with AvalancheGo plugins.
 
+### Run
+
+You can run you Precompile-EVM by using Avalanche Network Runner
+
+```bash
+avalanche-network-runner server \
+--log-level debug \
+--port=":8080" \
+--grpc-gateway-port=":8081"
+```
+
+Then launch a Subnet with your custom VM:
+
+```bash
+  avalanche-network-runner control start \
+  --log-level debug \
+  --endpoint="0.0.0.0:8080" \
+  --number-of-nodes=5 \
+  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "./.devcontainer/genesis-example.json"}]'
+```
+
 ### Test
 
 You can create contract tests in `contracts/test` with the Hardhat test framework. These can be run by adding ginkgko test cases in `tests/precompile/solidity/suites.go` and a suitable genesis file in `tests/precompile/genesis`. You can install AvalancheGo binaries with `./scripts/install_avalanchego_release.sh` then run the tests with `./scripts/run_ginkgo.sh`
@@ -168,5 +189,6 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 [v0.1.7] AvalancheGo@v1.10.15-v1.10.17 (Protocol Version: 30)
 [v0.1.8] AvalancheGo@v1.10.18-v1.10.19 (Protocol Version: 31)
 [v0.2.0] AvalancheGo@v1.11.0-v1.11.1 (Protocol Version: 33)
-[v0.2.1] AvalancheGo@v1.11.3 (Protocol Version: 35)
+[v0.2.1] AvalancheGo@v1.11.3-v1.11.5 (Protocol Version: 35)
+[v0.2.2] AvalancheGo@v1.11.3-v1.11.5 (Protocol Version: 35)
 ```

@@ -1,6 +1,10 @@
 {
   "config": {
     "chainId": 99999,
+    "warpConfig": {
+      "blockTimestamp": 0,
+      "quorumNumerator": 67
+    },
     "feeConfig": {
       "gasLimit": 15000000,
       "minBaseFee": 25000000000,
