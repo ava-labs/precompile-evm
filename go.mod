@@ -5,6 +5,7 @@ go 1.21.9
 require (
 	github.com/ava-labs/avalanchego v1.11.5
 	github.com/ava-labs/subnet-evm v0.6.4
+	github.com/ethereum/go-ethereum v1.13.2
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.29.0
 	github.com/stretchr/testify v1.8.4
@@ -15,7 +16,7 @@ require (
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/VictoriaMetrics/fastcache v1.10.0 // indirect
-	github.com/ava-labs/coreth v0.13.2-rc.2 // indirect
+	github.com/ava-labs/coreth v0.13.3-rc.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.7.0 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2 // indirect
@@ -66,7 +67,7 @@ require (
 	github.com/holiman/billy v0.0.0-20230718173358-1c7e68d277a7 // indirect
 	github.com/holiman/bloomfilter/v2 v2.0.3 // indirect
 	github.com/holiman/uint256 v1.2.3 // indirect
-	github.com/huin/goupnp v1.0.3 // indirect
+	github.com/huin/goupnp v1.3.0 // indirect
 	github.com/jackpal/gateway v1.0.6 // indirect
 	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
 	github.com/klauspost/compress v1.15.15 // indirect
