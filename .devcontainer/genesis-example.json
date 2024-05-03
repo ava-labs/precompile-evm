@@ -1,15 +1,6 @@
 {
   "config": {
     "chainId": 99999,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
     "warpConfig": {
       "blockTimestamp": 0,
       "quorumNumerator": 67
@@ -32,7 +23,7 @@
     }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66350B4E",
   "extraData": "0x00",
   "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
