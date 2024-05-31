@@ -1,15 +1,10 @@
-import {
-  Contract,
-  ContractFactory
-} from "ethers"
 import { ethers } from "hardhat"
+import { ExampleHelloWorld } from "typechain-types"
 
 const main = async (): Promise<any> => {
-  const contractFactory: ContractFactory = await ethers.getContractFactory("ExampleHelloWorld")
-  const contract: Contract = await contractFactory.deploy()
-
-  await contract.deployed()
-  console.log(`Contract deployed to: ${contract.address}`)
+  const contract: ExampleHelloWorld = await ethers.deployContract("ExampleHelloWorld")
+  await contract.waitForDeployment()
+  console.log(`Contract deployed to: ${contract.target}`)
 }
 
 main()

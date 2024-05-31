@@ -6,6 +6,7 @@ import { expect } from "chai"
 import { Contract, Signer } from "ethers"
 import { ethers } from "hardhat"
 import { test } from "@avalabs/subnet-evm-contracts"
+import { IHelloWorld } from "typechain-types"
 
 // make sure this is always an admin for hello world precompile
 const ADMIN_ADDRESS = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
@@ -22,7 +23,7 @@ describe("ExampleHelloWorldTest", function () {
       .then(factory => factory.deploy())
       .then(contract => {
         this.testContract = contract
-        return contract.deployed().then(() => contract)
+        return contract.waitForDeployment().then(() => contract)
       })
       .then(() => Promise.all([helloWorldPromise]))
       .then(([helloWorld]) => helloWorld.setAdmin(this.testContract.target))
@@ -39,7 +40,7 @@ describe("ExampleHelloWorldTest", function () {
 describe("IHelloWorld events", function () {
   let owner: Signer
   let ownerAddress: string
-  let contract: Contract
+  let contract: IHelloWorld
   let defaultGreeting = "Hello, World!"
   before(async function () {
     owner = await ethers.getSigner(ADMIN_ADDRESS);
@@ -53,8 +54,9 @@ describe("IHelloWorld events", function () {
 
   it("should emit GreetingChanged event", async function () {
     let newGreeting = "helloprecompile"
-    await expect(contract.setGreeting(newGreeting)
-    )
+    let tx = await contract.setGreeting(newGreeting)
+    let receipt = await tx.wait()
+    await expect(receipt)
       .to.emit(contract, "GreetingChanged").withArgs(
         ownerAddress,
         // old greeting
