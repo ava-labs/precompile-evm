@@ -3,8 +3,7 @@
 
 
 import { expect } from "chai"
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { Contract } from "ethers"
+import { Contract, Signer } from "ethers"
 import { ethers } from "hardhat"
 import { test } from "@avalabs/subnet-evm-contracts"
 
@@ -26,7 +25,7 @@ describe("ExampleHelloWorldTest", function () {
         return contract.deployed().then(() => contract)
       })
       .then(() => Promise.all([helloWorldPromise]))
-      .then(([helloWorld]) => helloWorld.setAdmin(this.testContract.address))
+      .then(([helloWorld]) => helloWorld.setAdmin(this.testContract.target))
       .then(tx => tx.wait())
   })
 
@@ -38,11 +37,13 @@ describe("ExampleHelloWorldTest", function () {
 });
 
 describe("IHelloWorld events", function () {
-  let owner: SignerWithAddress
+  let owner: Signer
+  let ownerAddress: string
   let contract: Contract
   let defaultGreeting = "Hello, World!"
   before(async function () {
     owner = await ethers.getSigner(ADMIN_ADDRESS);
+    ownerAddress = await owner.getAddress()
     contract = await ethers.getContractAt("IHelloWorld", HELLO_WORLD_ADDRESS, owner)
 
     // reset greeting
@@ -54,7 +55,8 @@ describe("IHelloWorld events", function () {
     let newGreeting = "helloprecompile"
     await expect(contract.setGreeting(newGreeting)
     )
-      .to.emit(contract, "GreetingChanged").withArgs(owner.address,
+      .to.emit(contract, "GreetingChanged").withArgs(
+        ownerAddress,
         // old greeting
         defaultGreeting,
         // new greeting
