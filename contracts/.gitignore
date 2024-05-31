@@ -145,5 +145,6 @@ dist
 
 local_rpc.json
 
-# TODO: Remove this once we publish the package
-!avalabs-subnet-evm-contracts-1.0.0.tgz
+# TypeChain files
+/typechain
+/typechain-types
