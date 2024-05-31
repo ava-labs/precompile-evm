@@ -1,7 +1,7 @@
 {
   "name": "@avalabs/precompile-evm-contracts",
   "devDependencies": {
-    "@avalabs/subnet-evm-contracts": "^1.2.1",
+    "@avalabs/subnet-evm-contracts": "file:avalabs-subnet-evm-contracts-1.2.1.tgz",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@types/chai": "^4.3.16",
