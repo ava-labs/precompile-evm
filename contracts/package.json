@@ -27,11 +27,12 @@
   },
   "license": "BSD-3-Clause",
   "scripts": {
-    "build": "rm -rf dist/ && npx hardhat compile && tsc -b ",
+    "build": "rm -rf dist/ && npx hardhat compile && npx tsc -b && npx hardhat typechain",
     "compile": "npx hardhat compile",
     "console": "npx hardhat console",
     "test": "npx hardhat test",
-    "lint": "prettier --list-different 'contracts/**/*.sol'"
+    "lint": "prettier --list-different 'contracts/**/*.sol'",
+    "release:prepare": "rm -rf ./node_modules && npm install && npm run build"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.6"

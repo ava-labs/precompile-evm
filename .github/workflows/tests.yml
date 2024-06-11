@@ -9,7 +9,7 @@ on:
   pull_request:
 
 env:
-  min_go_version: "~1.21.1"
+  min_go_version: "~1.21.11"
 
 jobs:
   lint_test:
