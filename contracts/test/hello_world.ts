@@ -3,7 +3,7 @@
 
 
 import { expect } from "chai"
-import { Contract, Signer } from "ethers"
+import { Signer } from "ethers"
 import { ethers } from "hardhat"
 import { test } from "@avalabs/subnet-evm-contracts"
 import { IHelloWorld } from "typechain-types"
