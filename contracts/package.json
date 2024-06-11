@@ -27,7 +27,7 @@
   },
   "license": "BSD-3-Clause",
   "scripts": {
-    "build": "rm -rf dist/ && npx hardhat compile && npx tsc -b ",
+    "build": "rm -rf dist/ && npx hardhat compile && npx tsc -b && npx hardhat typechain",
     "compile": "npx hardhat compile",
     "console": "npx hardhat console",
     "test": "npx hardhat test",
