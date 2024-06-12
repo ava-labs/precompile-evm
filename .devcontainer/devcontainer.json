@@ -6,7 +6,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"AVALANCHEGO_VERSION": "v1.11.5"
+			"AVALANCHEGO_VERSION": "v1.11.7"
 		}
 	},
 	"runArgs": ["--network=host"],
