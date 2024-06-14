@@ -54,32 +54,13 @@ You can run you Precompile-EVM by using the Avalanche CLI.
 First, create the configuration for your subnet.
 
 ```bash
-avalanche subnet create mysubnet
-✔ Custom
-creating custom VM subnet mysubnet
-Enter path to custom genesis: ./.devcontainer/genesis-example.json
-✔ I already have a VM binary (local network deployments only)
-Enter path to VM binary: /go/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
-✓ Successfully created subnet configuration
+avalanche subnet create mysubnet --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
 ```
 
 Next, launch the Subnet with your custom VM:
 
 ```bash
 avalanche subnet deploy mysubnet
-✔ Local Network
-Deploying [mysubnet] to Local Network
-Backend controller started, pid: 10401, output at: /root/.avalanche-cli/runs/server_20240614_111700/avalanche-cli-backend.log
-Installing avalanchego-v1.11.8...
-avalanchego-v1.11.8 installation successful
-
-Booting Network. Wait until healthy...
-Node logs directory: /root/.avalanche-cli/runs/network_20240614_111713/node<i>/logs
-Network ready to use.
-
-Deploying Blockchain. Wait until network acknowledges...
-
-Blockchain ready to use
 ```
 
 ### Test
