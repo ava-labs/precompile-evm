@@ -49,23 +49,18 @@ You can build your precompile and Subnet-EVM with `./scripts/build.sh`. This scr
 
 ### Run
 
-You can run you Precompile-EVM by using Avalanche Network Runner
+You can run you Precompile-EVM by using the Avalanche CLI.
+
+First, create the configuration for your subnet.
 
 ```bash
-avalanche-network-runner server \
---log-level debug \
---port=":8080" \
---grpc-gateway-port=":8081"
+avalanche subnet create mysubnet --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
 ```
 
-Then launch a Subnet with your custom VM:
+Next, launch the Subnet with your custom VM:
 
 ```bash
-  avalanche-network-runner control start \
-  --log-level debug \
-  --endpoint="0.0.0.0:8080" \
-  --number-of-nodes=5 \
-  --blockchain-specs '[{"vm_name": "subnetevm", "genesis": "./.devcontainer/genesis-example.json"}]'
+avalanche subnet deploy mysubnet
 ```
 
 ### Test
