@@ -11,5 +11,3 @@ COPY --from=foundry /usr/local/bin/forge /usr/local/bin/forge
 COPY --from=foundry /usr/local/bin/cast /usr/local/bin/cast
 COPY --from=foundry /usr/local/bin/anvil /usr/local/bin/anvil
 COPY --from=foundry /usr/local/bin/chisel /usr/local/bin/chisel
-
-RUN curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
