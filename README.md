@@ -58,13 +58,13 @@ You can run you Precompile-EVM by using the Avalanche CLI.
 First, create the configuration for your subnet.
 
 ```bash
-avalanche subnet create myblockchain --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
+avalanche blockchain create myblockchain --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
 ```
 
 Next, launch the Subnet with your custom VM:
 
 ```bash
-avalanche subnet deploy myblockchain
+avalanche blockchain deploy myblockchain
 ```
 
 ### Test
