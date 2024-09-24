@@ -47,6 +47,22 @@ In `plugin/main.go` Subnet-EVM is already imported and ready to be Run from the 
 
 You can build your precompile and Subnet-EVM with `./scripts/build.sh`. This script builds Subnet-EVM, and your precompile together and generates a binary file. The binary file is compatible with AvalancheGo plugins.
 
+### Run
+
+You can run you Precompile-EVM by using the Avalanche CLI.
+
+First, create the configuration for your subnet.
+
+```bash
+avalanche subnet create mysubnet --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
+```
+
+Next, launch the Subnet with your custom VM:
+
+```bash
+avalanche subnet deploy mysubnet
+```
+
 ### Test
 
 You can create contract tests in `contracts/test` with the Hardhat test framework. These can be run by adding ginkgko test cases in `tests/precompile/solidity/suites.go` and a suitable genesis file in `tests/precompile/genesis`. You can install AvalancheGo binaries with `./scripts/install_avalanchego_release.sh` then run the tests with `./scripts/run_ginkgo.sh`
@@ -60,6 +76,14 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 ```text
 [v0.1.0-v0.1.1] AvalancheGo@v1.10.1-v1.10.4 (Protocol Version: 26)
 [v0.1.2] AvalancheGo@v1.10.5-v1.10.8 (Protocol Version: 27)
-[v0.1.3] AvalancheGo@v1.10.9-v1.10.11 (Protocol Version: 28)
-[v0.1.4] AvalancheGo@v1.10.9-v1.10.11 (Protocol Version: 28)
+[v0.1.3] AvalancheGo@v1.10.9-v1.10.12 (Protocol Version: 28)
+[v0.1.4] AvalancheGo@v1.10.9-v1.10.12 (Protocol Version: 28)
+[v0.1.5] AvalancheGo@v1.10.13-v1.10.14 (Protocol Version: 29)
+[v0.1.6] AvalancheGo@v1.10.15-v1.10.17 (Protocol Version: 30)
+[v0.1.7] AvalancheGo@v1.10.15-v1.10.17 (Protocol Version: 30)
+[v0.1.8] AvalancheGo@v1.10.18-v1.10.19 (Protocol Version: 31)
+[v0.2.0] AvalancheGo@v1.11.0-v1.11.1 (Protocol Version: 33)
+[v0.2.1] AvalancheGo@v1.11.3-v1.11.7 (Protocol Version: 35)
+[v0.2.2] AvalancheGo@v1.11.3-v1.11.7 (Protocol Version: 35)
+[v0.2.3] AvalancheGo@v1.11.3-v1.11.7 (Protocol Version: 35)
 ```

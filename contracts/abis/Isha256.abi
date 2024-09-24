@@ -1,1 +1,21 @@
-[{"inputs":[{"internalType":"string","name":"value","type":"string"}],"name":"hashWithSHA256","outputs":[{"internalType":"bytes32","name":"hash","type":"bytes32"}],"stateMutability":"view","type":"function"}]
+[
+  {
+    "type": "function",
+    "name": "hashWithSHA256",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "hash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  }
+]
