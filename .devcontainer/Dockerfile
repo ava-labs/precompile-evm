@@ -1,5 +1,6 @@
 ARG AVALANCHEGO_VERSION
-FROM avaplatform/avalanche-cli:latest as avalanche-cli
+FROM avaplatform/avalanche-cli:v1.7.1 as avalanche-cli
+FROM avaplatform/awm-relayer:latest as awm-relayer
 FROM --platform=linux/amd64 ghcr.io/foundry-rs/foundry:latest as foundry
 FROM avaplatform/avalanchego:$AVALANCHEGO_VERSION as avalanchego
 FROM mcr.microsoft.com/devcontainers/base
@@ -12,4 +13,5 @@ COPY --from=foundry /usr/local/bin/cast /usr/local/bin/cast
 COPY --from=foundry /usr/local/bin/anvil /usr/local/bin/anvil
 COPY --from=foundry /usr/local/bin/chisel /usr/local/bin/chisel
 
-RUN curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/main/scripts/install.sh | sh -s
+RUN mkdir -p /home/vscode/.foundry/bin
+COPY --from=foundry /usr/local/bin/forge /home/vscode/.foundry/bin/forge
