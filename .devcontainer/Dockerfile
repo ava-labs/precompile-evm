@@ -1,5 +1,5 @@
 ARG AVALANCHEGO_VERSION
-FROM avaplatform/avalanche-cli:v1.7.1 as avalanche-cli
+FROM avaplatform/avalanche-cli:latest as avalanche-cli
 FROM avaplatform/awm-relayer:latest as awm-relayer
 FROM --platform=linux/amd64 ghcr.io/foundry-rs/foundry:latest as foundry
 FROM avaplatform/avalanchego:$AVALANCHEGO_VERSION as avalanchego
