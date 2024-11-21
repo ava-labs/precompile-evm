@@ -28,7 +28,7 @@ In order to run the Dev Container locally:
 
 ## Learn about Precompile-EVM
 
-To get a comprehensive introduction to Precompile-EVM, take the Avalanche Academy course on [Customizing the EVM](https://academy.avax.com/course/customize-evm).
+To get a comprehensive introduction to Precompile-EVM, take the Avalanche Academy course on [Customizing the EVM](https://academy.avax.network/course/customizing-evm).
 
 ## How to use
 
