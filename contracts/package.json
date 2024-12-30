@@ -35,7 +35,8 @@
     "release:prepare": "rm -rf ./node_modules && npm install && npm run build"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.9.6"
+    "@openzeppelin/contracts": "^4.9.6",
+    "solc": "^0.8.27"
   },
   "engines": {
     "npm": ">7.0.0",
