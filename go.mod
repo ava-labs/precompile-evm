@@ -3,7 +3,7 @@ module github.com/ava-labs/precompile-evm
 go 1.22.8
 
 require (
-	github.com/ava-labs/avalanchego v1.12.0
+	github.com/ava-labs/avalanchego v1.12.0-config-pebble-sync
 	github.com/ava-labs/subnet-evm v0.7.0
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.29.0
