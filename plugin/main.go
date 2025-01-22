@@ -14,6 +14,7 @@ import (
 	// will cause the precompile to be registered with the subnet-evm.
 	// ADD YOUR PRECOMPILE HERE
 	//_ "github.com/ava-labs/precompile-evm/{yourprecompilepkg}"
+	_ "github.com/ava-labs/precompile-evm/bls"
 )
 
 const Version = "v0.2.5"
