@@ -58,9 +58,10 @@
 		  },
 		  "extensions": [
 			"golang.go",
-		  	"nomicfoundation.hardhat-solidity",
-		  	"rangav.vscode-thunder-client"
-			]
+			"nomicfoundation.hardhat-solidity",
+			"rangav.vscode-thunder-client",
+			"MS-vsliveshare.vsliveshare"
+		]
 		}
 	  }
 }

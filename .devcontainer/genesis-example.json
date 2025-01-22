@@ -15,6 +15,9 @@
       "targetBlockRate": 2,
       "blockGasCostStep": 200000
     },
+    "blsVerificationConfig": { 
+      "blockTimestamp": 0
+    },
     "allowFeeRecipients": false
   },
   "alloc": {

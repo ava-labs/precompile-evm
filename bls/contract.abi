@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"bytes","name":"signature","type":"bytes"},{"internalType":"bytes","name":"publicKey","type":"bytes"},{"internalType":"bytes","name":"message","type":"bytes"}],"name":"verifySignature","outputs":[{"internalType":"bool","name":"isValid","type":"bool"}],"stateMutability":"view","type":"function"}]
