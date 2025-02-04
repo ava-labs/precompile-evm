@@ -16,6 +16,8 @@ import (
 	_ "embed"
 
 	"github.com/ethereum/go-ethereum/common"
+
+	bls "github.com/ava-labs/avalanchego/utils/crypto/bls"
 )
 
 const (
@@ -97,12 +99,27 @@ func verifySignatureBLS(accessibleState contract.AccessibleState, caller common.
 		return nil, remainingGas, err
 	}
 
-	// CUSTOM CODE STARTS HERE
-	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+	// Convert the message string to bytes.
+	messageBytes := []byte(inputStruct.Message)
 
-	var output bool // CUSTOM CODE FOR AN OUTPUT
-	bls
-	packedOutput, err := PackVerifySignatureBLSOutput(output)
+	// Parse the signature from bytes.
+	sig, err := bls.SignatureFromBytes(inputStruct.Signature)
+	if err != nil {
+		return nil, remainingGas, fmt.Errorf("failed to parse signature: %w", err)
+	}
+
+	// Parse the public key from bytes.
+	pubKey, err := bls.PublicKeyFromCompressedBytes(inputStruct.PublicKey)
+	if err != nil {
+		return nil, remainingGas, fmt.Errorf("failed to parse public key: %w", err)
+	}
+
+	// Use the BLS package to verify the signature.
+	// This returns a boolean indicating whether the signature is valid.
+	verified := bls.Verify(pubKey, sig, messageBytes)
+
+	// Pack the boolean output.
+	packedOutput, err := PackVerifySignatureBLSOutput(verified)
 	if err != nil {
 		return nil, remainingGas, err
 	}
