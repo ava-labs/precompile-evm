@@ -25,7 +25,9 @@ const (
 	// You should set a gas cost for each function in your contract.
 	// Generally, you should not set gas costs very low as this may cause your network to be vulnerable to DoS attacks.
 	// There are some predefined gas costs in contract/utils.go that you can use.
-	VerifySignatureBLSGasCost uint64 = 1 /* SET A GAS COST HERE */
+	AggregatePublicKeysGasCost uint64 = 1 /* SET A GAS COST HERE */
+	AggregateSignaturesGasCost uint64 = 1 /* SET A GAS COST HERE */
+	VerifySignatureBLSGasCost  uint64 = 1 /* SET A GAS COST HERE */
 )
 
 // CUSTOM CODE STARTS HERE
@@ -54,6 +56,126 @@ type VerifySignatureBLSInput struct {
 	Message   string
 	Signature []byte
 	PublicKey []byte
+}
+
+// UnpackAggregatePublicKeysInput attempts to unpack [input] into the [][]byte type argument
+// assumes that [input] does not include selector (omits first 4 func signature bytes)
+func UnpackAggregatePublicKeysInput(input []byte) ([][]byte, error) {
+	res, err := VerifyBLSABI.UnpackInput("aggregatePublicKeys", input, false)
+	if err != nil {
+		return nil, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([][]byte)).(*[][]byte)
+	return unpacked, nil
+}
+
+// PackAggregatePublicKeys packs [publicKeys] of type [][]byte into the appropriate arguments for aggregatePublicKeys.
+// the packed bytes include selector (first 4 func signature bytes).
+// This function is mostly used for tests.
+func PackAggregatePublicKeys(publicKeys [][]byte) ([]byte, error) {
+	return VerifyBLSABI.Pack("aggregatePublicKeys", publicKeys)
+}
+
+// PackAggregatePublicKeysOutput attempts to pack given publicKey of type []byte
+// to conform the ABI outputs.
+func PackAggregatePublicKeysOutput(publicKey []byte) ([]byte, error) {
+	return VerifyBLSABI.PackOutput("aggregatePublicKeys", publicKey)
+}
+
+// UnpackAggregatePublicKeysOutput attempts to unpack given [output] into the []byte type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackAggregatePublicKeysOutput(output []byte) ([]byte, error) {
+	res, err := VerifyBLSABI.Unpack("aggregatePublicKeys", output)
+	if err != nil {
+		return []byte{}, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([]byte)).(*[]byte)
+	return unpacked, nil
+}
+
+func aggregatePublicKeys(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, AggregatePublicKeysGasCost); err != nil {
+		return nil, 0, err
+	}
+	// attempts to unpack [input] into the arguments to the AggregatePublicKeysInput.
+	// Assumes that [input] does not include selector
+	// You can use unpacked [inputStruct] variable in your code
+	inputStruct, err := UnpackAggregatePublicKeysInput(input)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// CUSTOM CODE STARTS HERE
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+
+	var output []byte // CUSTOM CODE FOR AN OUTPUT
+	packedOutput, err := PackAggregatePublicKeysOutput(output)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
+}
+
+// UnpackAggregateSignaturesInput attempts to unpack [input] into the [][]byte type argument
+// assumes that [input] does not include selector (omits first 4 func signature bytes)
+func UnpackAggregateSignaturesInput(input []byte) ([][]byte, error) {
+	res, err := VerifyBLSABI.UnpackInput("aggregateSignatures", input, false)
+	if err != nil {
+		return nil, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([][]byte)).(*[][]byte)
+	return unpacked, nil
+}
+
+// PackAggregateSignatures packs [signatures] of type [][]byte into the appropriate arguments for aggregateSignatures.
+// the packed bytes include selector (first 4 func signature bytes).
+// This function is mostly used for tests.
+func PackAggregateSignatures(signatures [][]byte) ([]byte, error) {
+	return VerifyBLSABI.Pack("aggregateSignatures", signatures)
+}
+
+// PackAggregateSignaturesOutput attempts to pack given signature of type []byte
+// to conform the ABI outputs.
+func PackAggregateSignaturesOutput(signature []byte) ([]byte, error) {
+	return VerifyBLSABI.PackOutput("aggregateSignatures", signature)
+}
+
+// UnpackAggregateSignaturesOutput attempts to unpack given [output] into the []byte type output
+// assumes that [output] does not include selector (omits first 4 func signature bytes)
+func UnpackAggregateSignaturesOutput(output []byte) ([]byte, error) {
+	res, err := VerifyBLSABI.Unpack("aggregateSignatures", output)
+	if err != nil {
+		return []byte{}, err
+	}
+	unpacked := *abi.ConvertType(res[0], new([]byte)).(*[]byte)
+	return unpacked, nil
+}
+
+func aggregateSignatures(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, AggregateSignaturesGasCost); err != nil {
+		return nil, 0, err
+	}
+	// attempts to unpack [input] into the arguments to the AggregateSignaturesInput.
+	// Assumes that [input] does not include selector
+	// You can use unpacked [inputStruct] variable in your code
+	inputStruct, err := UnpackAggregateSignaturesInput(input)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// CUSTOM CODE STARTS HERE
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+
+	var output []byte // CUSTOM CODE FOR AN OUTPUT
+	packedOutput, err := PackAggregateSignaturesOutput(output)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
 }
 
 // UnpackVerifySignatureBLSInput attempts to unpack [input] as VerifySignatureBLSInput
@@ -134,7 +256,9 @@ func createVerifyBLSPrecompile() contract.StatefulPrecompiledContract {
 	var functions []*contract.StatefulPrecompileFunction
 
 	abiFunctionMap := map[string]contract.RunStatefulPrecompileFunc{
-		"verifySignatureBLS": verifySignatureBLS,
+		"aggregatePublicKeys": aggregatePublicKeys,
+		"aggregateSignatures": aggregateSignatures,
+		"verifySignatureBLS":  verifySignatureBLS,
 	}
 
 	for name, function := range abiFunctionMap {

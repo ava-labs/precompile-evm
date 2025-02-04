@@ -29,6 +29,36 @@ var (
 // tests for specific cases.
 var (
 	tests = map[string]testutils.PrecompileTest{
+		"insufficient gas for aggregatePublicKeys should fail": {
+			Caller: common.Address{1},
+			InputFn: func(t testing.TB) []byte {
+				// CUSTOM CODE STARTS HERE
+				// set test input to a value here
+				var testInput [][]byte
+				testInput = nil
+				input, err := PackAggregatePublicKeys(testInput)
+				require.NoError(t, err)
+				return input
+			},
+			SuppliedGas: AggregatePublicKeysGasCost - 1,
+			ReadOnly:    false,
+			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+		},
+		"insufficient gas for aggregateSignatures should fail": {
+			Caller: common.Address{1},
+			InputFn: func(t testing.TB) []byte {
+				// CUSTOM CODE STARTS HERE
+				// set test input to a value here
+				var testInput [][]byte
+				testInput = nil
+				input, err := PackAggregateSignatures(testInput)
+				require.NoError(t, err)
+				return input
+			},
+			SuppliedGas: AggregateSignaturesGasCost - 1,
+			ReadOnly:    false,
+			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+		},
 		"insufficient gas for verifySignatureBLS should fail": {
 			Caller: common.Address{1},
 			InputFn: func(t testing.TB) []byte {
