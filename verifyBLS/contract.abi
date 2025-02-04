@@ -1,0 +1,1 @@
+[{"inputs":[{"internalType":"string","name":"message","type":"string"},{"internalType":"bytes","name":"signature","type":"bytes"},{"internalType":"bytes","name":"publicKey","type":"bytes"}],"name":"verifySignatureBLS","outputs":[{"internalType":"bool","name":"result","type":"bool"}],"stateMutability":"view","type":"function"}]

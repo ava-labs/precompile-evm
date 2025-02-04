@@ -16,6 +16,7 @@ import (
 	_ "github.com/ava-labs/precompile-evm/calculator"
 	_ "github.com/ava-labs/precompile-evm/sha256"
 	_ "github.com/ava-labs/precompile-evm/stringstore"
+	_ "github.com/ava-labs/precompile-evm/verifyBLS"
 )
 
 const Version = "v0.1.4"
