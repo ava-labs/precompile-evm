@@ -97,18 +97,29 @@ func aggregatePublicKeys(accessibleState contract.AccessibleState, caller common
 	if remainingGas, err = contract.DeductGas(suppliedGas, AggregatePublicKeysGasCost); err != nil {
 		return nil, 0, err
 	}
-	// attempts to unpack [input] into the arguments to the AggregatePublicKeysInput.
-	// Assumes that [input] does not include selector
-	// You can use unpacked [inputStruct] variable in your code
+	
 	inputStruct, err := UnpackAggregatePublicKeysInput(input)
 	if err != nil {
 		return nil, remainingGas, err
 	}
 
-	// CUSTOM CODE STARTS HERE
-	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+	var pubKeys []*bls.PublicKey
+  for _, pkBytes := range inputStruct {
+      pk, err := bls.PublicKeyFromCompressedBytes(pkBytes)
+      if err != nil {
+          return nil, remainingGas, fmt.Errorf("failed to parse public key: %w", err)
+      }
+      pubKeys = append(pubKeys, pk)
+  }
+	
+	aggPk, err := bls.AggregatePublicKeys(pubKeys)
+    if err != nil {
+        return nil, remainingGas, fmt.Errorf("failed to aggregate public keys: %w", err)
+    }
 
-	var output []byte // CUSTOM CODE FOR AN OUTPUT
+  // Convert the aggregated public key to compressed bytes.
+  output := bls.PublicKeyToCompressedBytes(aggPk)
+
 	packedOutput, err := PackAggregatePublicKeysOutput(output)
 	if err != nil {
 		return nil, remainingGas, err
@@ -157,19 +168,32 @@ func aggregateSignatures(accessibleState contract.AccessibleState, caller common
 	if remainingGas, err = contract.DeductGas(suppliedGas, AggregateSignaturesGasCost); err != nil {
 		return nil, 0, err
 	}
-	// attempts to unpack [input] into the arguments to the AggregateSignaturesInput.
-	// Assumes that [input] does not include selector
-	// You can use unpacked [inputStruct] variable in your code
+	
+
 	inputStruct, err := UnpackAggregateSignaturesInput(input)
 	if err != nil {
 		return nil, remainingGas, err
 	}
 
-	// CUSTOM CODE STARTS HERE
-	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+	var sigs []*bls.Signature
+  for _, sigBytes := range inputStruct {
+      sig, err := bls.SignatureFromBytes(sigBytes)
+      if err != nil {
+          return nil, remainingGas, fmt.Errorf("failed to parse signature: %w", err)
+      }
+      sigs = append(sigs, sig)
+  }
 
-	var output []byte // CUSTOM CODE FOR AN OUTPUT
-	packedOutput, err := PackAggregateSignaturesOutput(output)
+	aggSig, err := bls.AggregateSignatures(sigs)
+  if err != nil {
+      return nil, remainingGas, fmt.Errorf("failed to aggregate signatures: %w", err)
+  }
+
+  // Convert the aggregated signature to its compressed byte format.
+  output := bls.SignatureToBytes(aggSig)
+
+  // Pack the output according to your ABI.
+  packedOutput, err := PackAggregateSignaturesOutput(output)
 	if err != nil {
 		return nil, remainingGas, err
 	}
