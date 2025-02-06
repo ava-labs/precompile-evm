@@ -83,5 +83,6 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 [v0.2.2] AvalancheGo@v1.11.3-v1.11.9 (Protocol Version: 35)
 [v0.2.3] AvalancheGo@v1.11.3-v1.11.9 (Protocol Version: 35)
 [v0.2.4] AvalancheGo@v1.11.11-v1.11.12 (Protocol Version: 37)
-[v0.2.5] AvalancheGo@v1.11.13/v1.12.0-fuji (Protocol Version: 38)
+[v0.2.5] AvalancheGo@v1.11.13-v1.12.1 (Protocol Version: 38)
+[v0.3.0] AvalancheGo@v1.12.2 (Protocol Version: 39)
 ```
