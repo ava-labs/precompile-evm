@@ -25,7 +25,7 @@ set_module_version_var() {
     # If version is a pseudo-version (timestamp-hash format), extract the short hash
     if [[ "$version" =~ ^v.*[0-9]{14}-[0-9a-f]{12}$ ]]; then
       local module_hash
-      module_hash="$(echo "$version" | cut -d'-' -f3)"
+      module_hash="$(echo "$version" | grep -Eo '[0-9a-f]{12}$')"
       version="${module_hash::8}"
     fi
 
