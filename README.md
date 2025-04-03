@@ -33,8 +33,6 @@ To get a comprehensive introduction to Precompile-EVM, take the Avalanche Academ
 
 ## How to use
 
-There is an example branch [hello-world-example](https://github.com/ava-labs/precompile-evm/tree/hello-world-example) in this repository. You can check the example branch to see how to register precompiles and test them.
-
 ### 1. Generate Precompile Files
 
 First, you need to create your precompile contract interface in the `contracts` directory and build the ABI. Then you can generate your precompile as such:
@@ -61,6 +59,8 @@ First, create the configuration for your subnet.
 avalanche blockchain create myblockchain --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
 ```
 
+Confirm that the new `holamundo/` directory has the appropriate files.
+
 Next, launch the Subnet with your custom VM:
 
 ```bash
@@ -85,4 +85,5 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 [v0.2.4] AvalancheGo@v1.11.11-v1.11.12 (Protocol Version: 37)
 [v0.2.5] AvalancheGo@v1.11.13-v1.12.1 (Protocol Version: 38)
 [v0.3.0] AvalancheGo@v1.12.2 (Protocol Version: 39)
+[v0.4.0] AvalancheGo@v1.12.2/1.13.0-fuji/1.13.0 (Protocol Version: 39)
 ```
