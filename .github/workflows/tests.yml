@@ -8,26 +8,26 @@ on:
       - "*"
   pull_request:
 
-env:
-  min_go_version: "~1.22.8"
-
 jobs:
   lint_test:
     name: Lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: ${{ env.min_go_version }}
-          check-latest: true
+          go-version-file: "go.mod"
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.56
+          version: v1.63
           working-directory: .
           args: --timeout 10m
           skip-pkg-cache: true
+      - name: go mod tidy
+        run: |
+          go mod tidy
+          git diff --exit-code
 
   unit_test:
     name: Golang Unit Tests (${{ matrix.os }})
@@ -35,13 +35,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-20.04, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-22.04, ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: ${{ env.min_go_version }}
-          check-latest: true
+          go-version-file: "go.mod"
       - name: Set timeout on Windows # Windows UT run slower and need a longer timeout
         shell: bash
         if: matrix.os == 'windows-latest'
@@ -68,8 +67,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ env.min_go_version }}
-          check-latest: true
+          go-version-file: "go.mod"
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
