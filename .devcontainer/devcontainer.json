@@ -6,7 +6,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"AVALANCHEGO_VERSION": "v1.12.2"
+			"AVALANCHEGO_VERSION": "v1.13.0"
 		}
 	},
 	"runArgs": ["--network=host"],
@@ -26,7 +26,7 @@
 			"version": "latest"
 		},
 		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/devcontainers/features/go:1": {"version": 1.22}
+		"ghcr.io/devcontainers/features/go:1": {"version": 1.23}
 	 },
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
