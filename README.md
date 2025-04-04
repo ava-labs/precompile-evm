@@ -38,9 +38,11 @@ There is an example branch [hello-world-example](https://github.com/ava-labs/pre
 ### 1. Generate Precompile Files
 
 First, you need to create your precompile contract interface in the `contracts` directory and build the ABI. Then you can generate your precompile as such:
+
 ```bash
 ./scripts/generate_precompile.sh --abi {abiPath} --out {outPath}
 ```
+
 This script installs the `precompilegen` tool from Subnet-EVM and runs it to generate your precompile.
 
 ### 2. Register Precompile
@@ -84,6 +86,6 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 [v0.2.3] AvalancheGo@v1.11.3-v1.11.9 (Protocol Version: 35)
 [v0.2.4] AvalancheGo@v1.11.11-v1.11.12 (Protocol Version: 37)
 [v0.2.5] AvalancheGo@v1.11.13-v1.12.1 (Protocol Version: 38)
-[v0.3.0] AvalancheGo@v1.12.2 (Protocol Version: 39)
-[v0.3.1] AvalancheGo@v1.12.2/1.13.0-fuji/1.13.0 (Protocol Version: 39)
+[v0.3.0] AvalancheGo@v1.12.2/1.13.0 (Protocol Version: 39)
+[v0.3.1] AvalancheGo@v1.12.2/1.13.0 (Protocol Version: 39)
 ```
