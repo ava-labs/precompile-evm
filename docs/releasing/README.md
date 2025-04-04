@@ -32,6 +32,40 @@ export GITHUB_USER=username
     go mod tidy
     ```
 
+1. Get the Go version from the `go.mod` file:
+
+    ```bash
+    cat go.mod | grep -oE "^go 1\.\d+" | grep -oE "1\.\d+"
+    ```
+
+    and update the [.devcontainer/devcontainer.json](../../.devcontainer/devcontainer.json) file with the Go version at `.features.["ghcr.io/devcontainers/features/go:1.version"].version`, for example:
+
+    ```json
+    {
+        "features": {
+            "ghcr.io/devcontainers/features/go:1": {"version": 1.23},
+        }
+    }
+    ```
+
+1. Get the AvalancheGo version from the `go.mod` file:
+
+    ```bash
+    go list -m all | grep github.com/ava-labs/avalanchego | awk '{print $2}'
+    ```
+
+    and update the [.devcontainer/devcontainer.json](../../.devcontainer/devcontainer.json) file with it at `.build.args.AVALANCHEGO_VERSION`, for example:
+
+    ```json
+    {
+        "build": {
+            "args": {
+                "AVALANCHEGO_VERSION": "v1.13.0"
+            }
+        },
+    }
+    ```
+
 1. Add an entry in the object in [compatibility.json](../../compatibility.json), adding the target release `$VERSION` as key and the AvalancheGo RPC chain VM protocol version as value, to the `"rpcChainVMProtocolVersion"` JSON object. For example, we would add:
 
     ```json
@@ -40,7 +74,13 @@ export GITHUB_USER=username
 
     💁 If you are unsure about the RPC chain VM protocol version:
 
-    1. Check [go.mod](../../go.mod) and spot the version used for `github.com/ava-labs/avalanchego`. For example `v1.13.0`.
+    1. Find the AvalancheGo version used in [go.mod](../../go.mod):
+
+        ```bash
+        go list -m all | grep github.com/ava-labs/avalanchego | awk '{print $2}'
+        ```
+
+        For example `v1.13.0`.
     1. Refer to the [Avalanchego repository `version/compatibility.json` file](https://github.com/ava-labs/avalanchego/blob/main/version/compatibility.json) to find the RPC chain VM protocol version matching the AvalancheGo version we use here. In our case, we use an AvalancheGo version `v1.13.0`, so the RPC chain VM protocol version is `39`:
 
         ```json
