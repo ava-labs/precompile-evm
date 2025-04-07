@@ -139,6 +139,22 @@ export GITHUB_USER=username
     1. In the "Target", pick the branch `releases/$VERSION` (`releases/v0.4.0`)
     1. Pick the previous release, for example as `v0.3.0`.
     1. Set the "Release title" to `$VERSION` (`v0.4.0`)
-    1. Set the description (breaking changes, features, fixes, documentation)
+    1. Set the description using this format:
+
+        ```markdown
+        # AvalancheGo Compatibility
+
+        The plugin version is unchanged at 39 and is compatible with AvalancheGo version v1.13.0.
+
+        # Breaking changes
+
+        # Features
+
+        # Fixes
+
+        # Documentation
+
+        ```
+
     1. Only tick the box "Set as the latest release"
     1. Click on the "Create release" button
