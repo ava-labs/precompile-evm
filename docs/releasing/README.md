@@ -136,15 +136,36 @@ export GITHUB_USER=username
     ```
 
     This is to avoid creating a release targeting the `main` branch, which may contain new commits merged whilst the release is being created.
-1. Create a new release through the [Github web interface](https://github.com/ava-labs/subnet-evm/releases/new)
-    1. In the "Choose a tag" box, enter `$VERSION` (`v0.4.0`)
-    1. In the "Target", pick the branch `releases/$VERSION` (`releases/v0.4.0`)
-    1. Pick the previous release, for example as `v0.3.0`.
-    1. Set the "Release title" to `$VERSION` (`v0.4.0`)
-    1. Set the description using this format:
+1. Create a new release on Github, either using:
+    - the [Github web interface](https://github.com/ava-labs/subnet-evm/releases/new)
+        1. In the "Choose a tag" box, enter `$VERSION` (`v0.4.0`)
+        1. In the "Target", pick the branch `releases/$VERSION` (`releases/v0.4.0`)
+        1. Pick the previous release, for example as `v0.3.0`.
+        1. Set the "Release title" to `$VERSION` (`v0.4.0`)
+        1. Set the description using this format:
 
-        ```markdown
-        # AvalancheGo Compatibility
+            ```markdown
+            # AvalancheGo Compatibility
+
+            The plugin version is unchanged at 39 and is compatible with AvalancheGo version v1.13.0.
+
+            # Breaking changes
+
+            # Features
+
+            # Fixes
+
+            # Documentation
+
+            ```
+
+        1. Only tick the box "Set as the latest release"
+        1. Click on the "Create release" button
+    - the Github CLI `gh`:
+
+        ```bash
+        PREVIOUS_VERSION=v0.3.1
+        NOTES="# AvalancheGo Compatibility
 
         The plugin version is unchanged at 39 and is compatible with AvalancheGo version v1.13.0.
 
@@ -156,7 +177,6 @@ export GITHUB_USER=username
 
         # Documentation
 
+        "
+        gh release create "$VERSION" --target "releases/$VERSION" --title "$VERSION" --notes-start-tag "$PREVIOUS_VERSION" --notes "$NOTES"
         ```
-
-    1. Only tick the box "Set as the latest release"
-    1. Click on the "Create release" button
