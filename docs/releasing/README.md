@@ -117,7 +117,12 @@ export GITHUB_USER=username
     git push --force hello-world-example
     ```
 
-1. [Wait for the checks](https://github.com/ava-labs/precompile-evm/pull/12/checks) of the `hello-world-example` branch [PR](https://github.com/ava-labs/precompile-evm/pull/12) to pass. **Never merge this PR**.
+1. [Wait for the checks](https://github.com/ava-labs/precompile-evm/pull/12/checks) of the `hello-world-example` branch [PR](https://github.com/ava-labs/precompile-evm/pull/12) to pass. **Never merge this PR**. You can also use `gh` with:
+
+    ```bash
+    gh pr checks 12 --watch
+    ```
+
 1. Squash and merge your release branch into `main`, for example:
 
     ```bash
