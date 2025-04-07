@@ -118,13 +118,10 @@ export GITHUB_USER=username
     ```
 
 1. [Wait for the checks](https://github.com/ava-labs/precompile-evm/pull/12/checks) of the `hello-world-example` branch [PR](https://github.com/ava-labs/precompile-evm/pull/12) to pass. **Never merge this PR**.
-1. Squash and merge your release branch into `main`:
+1. Squash and merge your release branch into `main`, for example:
 
     ```bash
-    git checkout main
-    git merge --squash "$GITHUB_USER/releases/$VERSION"
-    git commit -S -m "chore: release $VERSION"
-    git push
+    gh pr merge "$GITHUB_USER/releases/$VERSION" --squash --delete-branch --subject "chore: release $VERSION" --body "\n- Bump subnet-evm from v0.7.3 to v0.7.4\n- Update AvalancheGo from v1.12.3 to v1.13.0"
     ```
 
 1. Create a release branch from the `main` branch, this time without your username prefix:
