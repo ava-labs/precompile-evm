@@ -72,32 +72,19 @@ export GITHUB_USER=username
     "v0.4.0": 39,
     ```
 
-    💁 If you are unsure about the RPC chain VM protocol version:
-
-    1. Find the AvalancheGo version used in [go.mod](../../go.mod):
-
-        ```bash
-        go list -m all | grep github.com/ava-labs/avalanchego | awk '{print $2}'
-        ```
-
-        For example `v1.13.0`.
-    1. Refer to the [Avalanchego repository `version/compatibility.json` file](https://github.com/ava-labs/avalanchego/blob/main/version/compatibility.json) to find the RPC chain VM protocol version matching the AvalancheGo version we use here. In our case, we use an AvalancheGo version `v1.13.0`, so the RPC chain VM protocol version is `39`:
-
-        ```json
-        {
-            "39": [
-                "v1.12.2",
-                "v1.13.0"
-            ],
-        }
-        ```
-
-    Finally, check the RPC chain VM protocol version compatibility is setup properly by running:
+    💁 If you are unsure about the RPC chain VM protocol version, set the version to `0`, for exampple `"v0.4.0": 0`, and then run:
 
     ```bash
     go test -run ^TestCompatibility$ github.com/ava-labs/precompile-evm/plugin
     ```
 
+    This will fail with an error similar to:
+
+    ```text
+    compatibility.json has precompile-evm version v0.4.0 stated as compatible with RPC chain VM protocol version 0 but AvalancheGo protocol version is 39
+    ```
+
+    This message can help you figure out what the correct RPC chain VM protocol version (here `39`) has to be in compatibility.json for your current release.
 1. Specify the AvalancheGo compatibility in the [README.md relevant section](../../README.md#avalanchego-compatibility). For example we would add:
 
     ```text
