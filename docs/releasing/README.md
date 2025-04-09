@@ -11,17 +11,14 @@ In this section, we create a release `v0.4.0`. We therefore assign these environ
 
 ```bash
 export VERSION=v0.4.0
-export GITHUB_USER=username
 ```
-
-`GITHUB_USER` is the username of the person creating the release. This is simply used to prefix branches.
 
 1. Create your branch, usually from the tip of the `main` branch:
 
     ```bash
     git fetch origin main:main
     git checkout main
-    git checkout -b "$GITHUB_USER/releases/$VERSION"
+    git checkout -b "releases/$VERSION"
     ```
 
 1. Modify the [plugin/main.go](../../plugin/main.go) `Version` global string constant and set it to the desired `$VERSION`.
@@ -97,7 +94,7 @@ export GITHUB_USER=username
     ```bash
     git add .
     git commit -S -m "chore: release $VERSION"
-    git push -u origin "$GITHUB_USER/releases/$VERSION"
+    git push -u origin "releases/$VERSION"
     ```
 
 1. Create a pull request (PR) from your branch targeting main, for example using [`gh`](https://cli.github.com/):
@@ -112,7 +109,7 @@ export GITHUB_USER=username
     ```bash
     git fetch origin hello-world-example:hello-world-example
     git checkout hello-world-example
-    git rebase "$GITHUB_USER/releases/$VERSION"
+    git rebase "releases/$VERSION"
     # Fix eventual conflicts
     git push --force hello-world-example
     ```
@@ -126,21 +123,25 @@ export GITHUB_USER=username
 1. Squash and merge your release branch into `main`, for example:
 
     ```bash
-    gh pr merge "$GITHUB_USER/releases/$VERSION" --squash --delete-branch --subject "chore: release $VERSION" --body "\n- Bump subnet-evm from v0.7.3 to v0.7.4\n- Update AvalancheGo from v1.12.3 to v1.13.0"
+    gh pr merge "releases/$VERSION" --squash --delete-branch --subject "chore: release $VERSION" --body "\n- Bump subnet-evm from v0.7.3 to v0.7.4\n- Update AvalancheGo from v1.12.3 to v1.13.0"
     ```
 
-1. Create a release branch from the `main` branch, this time without your username prefix:
+1. Create and push a tag from the `main` branch:
 
     ```bash
-    git checkout -b "releases/$VERSION"
+    git fetch origin main:main
+    git checkout main
+    # Double check the tip of the main branch is the expected commit
+    # of the squashed release branch
+    git log -1
+    git tag -s "$VERSION"
+    git push origin "$VERSION"
     ```
 
-    This is to avoid creating a release targeting the `main` branch, which may contain new commits merged whilst the release is being created.
 1. Create a new release on Github, either using:
     - the [Github web interface](https://github.com/ava-labs/subnet-evm/releases/new)
-        1. In the "Choose a tag" box, enter `$VERSION` (`v0.4.0`)
-        1. In the "Target", pick the branch `releases/$VERSION` (`releases/v0.4.0`)
-        1. Pick the previous release, for example as `v0.3.0`.
+        1. In the "Choose a tag" box, select the tag previously created `$VERSION` (`v0.4.0`)
+        1. Pick the previous tag, for example as `v0.3.1`.
         1. Set the "Release title" to `$VERSION` (`v0.4.0`)
         1. Set the description using this format:
 
@@ -178,5 +179,5 @@ export GITHUB_USER=username
         # Documentation
 
         "
-        gh release create "$VERSION" --target "releases/$VERSION" --title "$VERSION" --notes-start-tag "$PREVIOUS_VERSION" --notes "$NOTES"
+        gh release create "$VERSION" --notes-start-tag "$PREVIOUS_VERSION" --notes-from-tag "$VERSION" --title "$VERSION" --notes "$NOTES" --verify-tag
         ```
