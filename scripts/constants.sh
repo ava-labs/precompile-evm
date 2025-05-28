@@ -2,6 +2,8 @@
 
 # Set the PATHS
 GOPATH="$(go env GOPATH)"
+DEFAULT_PLUGIN_DIR="${HOME}/.avalanchego/plugins"
+DEFAULT_VM_ID="srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy"
 
 # Static compilation
 STATIC_LD_FLAGS=''
