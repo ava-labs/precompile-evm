@@ -20,9 +20,9 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.63
+          version: v1.64.8
           working-directory: .
-          args: --timeout 10m
+          args: --timeout 10m --out-format=colored-line-number
           skip-pkg-cache: true
       - name: go mod tidy
         run: |
