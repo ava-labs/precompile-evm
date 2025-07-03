@@ -7,14 +7,14 @@ package helloworld
 import (
 	"testing"
 
-	"github.com/ava-labs/subnet-evm/core/state"
+	"github.com/ava-labs/libevm/common"
+	"github.com/ava-labs/libevm/core/vm"
+	"github.com/ava-labs/subnet-evm/core/extstate"
 	"github.com/ava-labs/subnet-evm/precompile/allowlist"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
 	"github.com/ava-labs/subnet-evm/precompile/precompileconfig"
 	"github.com/ava-labs/subnet-evm/precompile/testutils"
 	"github.com/ava-labs/subnet-evm/utils"
-	"github.com/ava-labs/subnet-evm/vmerrs"
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 )
@@ -156,7 +156,7 @@ var (
 			},
 			SuppliedGas: SayHelloGasCost - 1,
 			ReadOnly:    false,
-			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
 		"calling setGreeting from NoRole should fail": {
 			Caller:     allowlist.TestNoRoleAddr,
@@ -256,7 +256,7 @@ var (
 			},
 			SuppliedGas: SetGreetingGasCost,
 			ReadOnly:    true,
-			ExpectedErr: vmerrs.ErrWriteProtection.Error(),
+			ExpectedErr: vm.ErrWriteProtection.Error(),
 		},
 		"insufficient gas for setGreeting should fail": {
 			Caller:     allowlist.TestEnabledAddr,
@@ -273,7 +273,7 @@ var (
 				NewGreeting: testGreeting,
 			}) - 1,
 			ReadOnly:    false,
-			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
 		// more custom tests
 		"store greeting then say hello from non-enabled address": {
@@ -344,7 +344,7 @@ func TestHelloWorldRun(t *testing.T) {
 	// and runs them all together.
 	// Even if you don't add any custom tests, keep this. This will still
 	// run the default allowlist tests.
-	allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)
+	allowlist.RunPrecompileWithAllowListTests(t, Module, extstate.NewTestStateDB, tests)
 }
 
 // TestPackUnpackGreetingChangedEventData tests the Pack/UnpackGreetingChangedEventData.
@@ -375,5 +375,5 @@ func BenchmarkHelloWorld(b *testing.B) {
 	// and benchmarks them all together.
 	// Even if you don't add any custom tests, keep this. This will still
 	// run the default allowlist tests.
-	allowlist.BenchPrecompileWithAllowList(b, Module, state.NewTestStateDB, tests)
+	allowlist.BenchPrecompileWithAllowList(b, Module, extstate.NewTestStateDB, tests)
 }
