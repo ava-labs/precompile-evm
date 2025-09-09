@@ -19,7 +19,7 @@ export SUBNET_EVM_VERSION=v0.7.4
 1. Create your branch, usually from the tip of the `main` branch:
 
     ```bash
-    git fetch origin main:main
+    git fetch origin main
     git checkout main
     git checkout -b "releases/$VERSION"
     ```
@@ -36,7 +36,7 @@ export SUBNET_EVM_VERSION=v0.7.4
 1. Get the Go version from the `go.mod` file:
 
     ```bash
-    cat go.mod | grep -oE "^go 1\.\d+" | grep -oE "1\.\d+"
+    grep -oE "^go (1\.[0-9]+)" go.mod | cut -d' ' -f2
     ```
 
     and update the [.devcontainer/devcontainer.json](../../.devcontainer/devcontainer.json) file with the Go version at `.features.["ghcr.io/devcontainers/features/go:1.version"].version`, for example:
@@ -133,7 +133,7 @@ export SUBNET_EVM_VERSION=v0.7.4
 1. Create and push a tag from the `main` branch:
 
     ```bash
-    git fetch origin main:main
+    git fetch origin main
     git checkout main
     # Double check the tip of the main branch is the expected commit
     # of the squashed release branch
