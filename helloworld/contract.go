@@ -8,14 +8,15 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/ava-labs/libevm/core/vm"
 	"github.com/ava-labs/subnet-evm/accounts/abi"
 	"github.com/ava-labs/subnet-evm/precompile/allowlist"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
-	"github.com/ava-labs/subnet-evm/vmerrs"
 
 	_ "embed"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/ava-labs/libevm/common"
+	"github.com/ava-labs/libevm/core/types"
 )
 
 const (
@@ -154,7 +155,7 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 		return nil, 0, err
 	}
 	if readOnly {
-		return nil, remainingGas, vmerrs.ErrWriteProtection
+		return nil, remainingGas, vm.ErrWriteProtection
 	}
 	// do not use strict mode after Durango
 	useStrictMode := !contract.IsDurangoActivated(accessibleState)
@@ -206,12 +207,12 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 		}
 
 		// Emit the event
-		stateDB.AddLog(
-			ContractAddress,
-			topics,
-			data,
-			accessibleState.GetBlockContext().Number().Uint64(),
-		)
+		stateDB.AddLog(&types.Log{
+			Address:     ContractAddress,
+			Topics:      topics,
+			Data:        data,
+			BlockNumber: accessibleState.GetBlockContext().Number().Uint64(),
+		})
 	}
 
 	// setGreeting is the execution function
