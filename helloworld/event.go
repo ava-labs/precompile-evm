@@ -5,8 +5,8 @@
 package helloworld
 
 import (
+	"github.com/ava-labs/libevm/common"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
-	"github.com/ethereum/go-ethereum/common"
 )
 
 /* NOTE: Events can only be emitted in state-changing functions. So you cannot use events in read-only (view) functions.

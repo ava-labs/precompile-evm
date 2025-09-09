@@ -7,14 +7,14 @@ package helloworld
 import (
 	"testing"
 
-	"github.com/ava-labs/subnet-evm/core/state"
-	"github.com/ava-labs/subnet-evm/precompile/allowlist"
+	"github.com/ava-labs/libevm/common"
+	"github.com/ava-labs/libevm/core/vm"
+	"github.com/ava-labs/subnet-evm/core/extstate"
+	"github.com/ava-labs/subnet-evm/precompile/allowlist/allowlisttest"
 	"github.com/ava-labs/subnet-evm/precompile/contract"
 	"github.com/ava-labs/subnet-evm/precompile/precompileconfig"
-	"github.com/ava-labs/subnet-evm/precompile/testutils"
+	"github.com/ava-labs/subnet-evm/precompile/precompiletest"
 	"github.com/ava-labs/subnet-evm/utils"
-	"github.com/ava-labs/subnet-evm/vmerrs"
-	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 )
@@ -28,10 +28,10 @@ const testGreeting = "test"
 const longString = "a very long string that is longer than 32 bytes and will cause an error"
 
 var (
-	tests = map[string]testutils.PrecompileTest{
+	tests = map[string]precompiletest.PrecompileTest{
 		"calling sayHello from NoRole should succeed": {
-			Caller:     allowlist.TestNoRoleAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestNoRoleAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
@@ -54,8 +54,8 @@ var (
 			ExpectedErr: "",
 		},
 		"calling sayHello from Enabled should succeed": {
-			Caller:     allowlist.TestEnabledAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestEnabledAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
@@ -78,8 +78,8 @@ var (
 			ExpectedErr: "",
 		},
 		"calling sayHello from Manager should succeed": {
-			Caller:     allowlist.TestManagerAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestManagerAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
@@ -102,8 +102,8 @@ var (
 			ExpectedErr: "",
 		},
 		"calling sayHello from Admin should succeed": {
-			Caller:     allowlist.TestAdminAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestAdminAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
 				require.NoError(t, err)
@@ -126,8 +126,8 @@ var (
 			ExpectedErr: "",
 		},
 		"calling sayHello from NoRole with a config should return default greeting": {
-			Caller:     allowlist.TestNoRoleAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestNoRoleAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			Config:     NewConfig(utils.NewUint64(0), nil, nil, nil),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
@@ -156,11 +156,11 @@ var (
 			},
 			SuppliedGas: SayHelloGasCost - 1,
 			ReadOnly:    false,
-			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
 		"calling setGreeting from NoRole should fail": {
-			Caller:     allowlist.TestNoRoleAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestNoRoleAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
@@ -173,8 +173,8 @@ var (
 			ExpectedErr: ErrCannotSetGreeting.Error(),
 		},
 		"calling setGreeting from Enabled should succeed": {
-			Caller:     allowlist.TestEnabledAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestEnabledAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
@@ -191,14 +191,14 @@ var (
 			}),
 			ReadOnly:    false,
 			ExpectedErr: "",
-			AfterHook: func(t testing.TB, state contract.StateDB) {
+			AfterHook: func(t testing.TB, state *extstate.StateDB) {
 				greeting := GetGreeting(state)
 				require.Equal(t, greeting, testGreeting)
 			},
 		},
 		"calling setGreeting from Manager should succeed": {
-			Caller:     allowlist.TestManagerAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestManagerAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
@@ -215,14 +215,14 @@ var (
 			}),
 			ReadOnly:    false,
 			ExpectedErr: "",
-			AfterHook: func(t testing.TB, state contract.StateDB) {
+			AfterHook: func(t testing.TB, state *extstate.StateDB) {
 				greeting := GetGreeting(state)
 				require.Equal(t, greeting, testGreeting)
 			},
 		},
 		"calling setGreeting from Admin should succeed": {
-			Caller:     allowlist.TestAdminAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestAdminAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
@@ -239,7 +239,7 @@ var (
 			}),
 			ReadOnly:    false,
 			ExpectedErr: "",
-			AfterHook: func(t testing.TB, state contract.StateDB) {
+			AfterHook: func(t testing.TB, state *extstate.StateDB) {
 				greeting := GetGreeting(state)
 				require.Equal(t, greeting, testGreeting)
 			},
@@ -256,11 +256,11 @@ var (
 			},
 			SuppliedGas: SetGreetingGasCost,
 			ReadOnly:    true,
-			ExpectedErr: vmerrs.ErrWriteProtection.Error(),
+			ExpectedErr: vm.ErrWriteProtection.Error(),
 		},
 		"insufficient gas for setGreeting should fail": {
-			Caller:     allowlist.TestEnabledAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestEnabledAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
 				// set test input to a value here
@@ -273,13 +273,13 @@ var (
 				NewGreeting: testGreeting,
 			}) - 1,
 			ReadOnly:    false,
-			ExpectedErr: vmerrs.ErrOutOfGas.Error(),
+			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
 		// more custom tests
 		"store greeting then say hello from non-enabled address": {
-			Caller: allowlist.TestNoRoleAddr,
-			BeforeHook: func(t testing.TB, state contract.StateDB) {
-				allowlist.SetDefaultRoles(Module.Address)(t, state)
+			Caller: allowlisttest.TestNoRoleAddr,
+			BeforeHook: func(t testing.TB, state *extstate.StateDB) {
+				allowlisttest.SetDefaultRoles(Module.Address)(t, state)
 				StoreGreeting(state, testGreeting)
 			},
 			InputFn: func(t testing.TB) []byte {
@@ -298,8 +298,8 @@ var (
 			}(),
 		},
 		"set a very long greeting from enabled address before Durango": {
-			Caller:     allowlist.TestEnabledAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestEnabledAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			// By default Durango is enabled in the tests.
 			ChainConfigFn: func(ctrl *gomock.Controller) precompileconfig.ChainConfig {
 				config := precompileconfig.NewMockChainConfig(ctrl)
@@ -318,8 +318,8 @@ var (
 			ExpectedErr: ErrInputExceedsLimit.Error(),
 		},
 		"set a very long greeting from enabled address after Durango": {
-			Caller:     allowlist.TestEnabledAddr,
-			BeforeHook: allowlist.SetDefaultRoles(Module.Address),
+			Caller:     allowlisttest.TestEnabledAddr,
+			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSetGreeting(longString)
 				require.NoError(t, err)
@@ -344,7 +344,7 @@ func TestHelloWorldRun(t *testing.T) {
 	// and runs them all together.
 	// Even if you don't add any custom tests, keep this. This will still
 	// run the default allowlist tests.
-	allowlist.RunPrecompileWithAllowListTests(t, Module, state.NewTestStateDB, tests)
+	allowlisttest.RunPrecompileWithAllowListTests(t, Module, tests)
 }
 
 // TestPackUnpackGreetingChangedEventData tests the Pack/UnpackGreetingChangedEventData.
@@ -367,13 +367,4 @@ func TestPackUnpackGreetingChangedEventData(t *testing.T) {
 	unpacked, err := UnpackGreetingChangedEventData(data)
 	require.NoError(t, err)
 	require.Equal(t, dataInput, unpacked)
-}
-
-func BenchmarkHelloWorld(b *testing.B) {
-	// Benchmark tests with allowlist tests.
-	// This adds allowlist run tests to your custom tests
-	// and benchmarks them all together.
-	// Even if you don't add any custom tests, keep this. This will still
-	// run the default allowlist tests.
-	allowlist.BenchPrecompileWithAllowList(b, Module, state.NewTestStateDB, tests)
 }
