@@ -19,7 +19,7 @@ export SUBNET_EVM_VERSION=v0.7.4
 1. Create your branch, usually from the tip of the `main` branch:
 
     ```bash
-    git fetch origin main:main
+    git fetch origin main
     git checkout main
     git checkout -b "releases/$VERSION"
     ```
@@ -133,7 +133,7 @@ export SUBNET_EVM_VERSION=v0.7.4
 1. Create and push a tag from the `main` branch:
 
     ```bash
-    git fetch origin main:main
+    git fetch origin main
     git checkout main
     # Double check the tip of the main branch is the expected commit
     # of the squashed release branch
