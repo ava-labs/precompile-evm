@@ -2,15 +2,15 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"name": "Avalanche-DevContainer",
-
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			"AVALANCHEGO_VERSION": "v1.13.5"
+			"AVALANCHEGO_VERSION": "v1.14.0"
 		}
 	},
-	"runArgs": ["--network=host"],
-
+	"runArgs": [
+		"--network=host"
+	],
 	"remoteEnv": {
 		"GOPATH": "/go",
 		"PATH": "${containerEnv:PATH}:${env:GOPATH}/bin:~/bin",
@@ -19,16 +19,16 @@
 		"PK": "56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
 		"KEYSTORE": "${containerWorkspaceFolder}/keystore"
 	},
-
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {
 			"version": "latest"
 		},
 		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/devcontainers/features/go:1": {"version": 1.23}
-	 },
-
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": 1.23
+		}
+	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		8080,
@@ -39,28 +39,24 @@
 		9656,
 		9658
 	],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "bash scripts/build.sh",
-
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	"remoteUser": "root",
-
 	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/ava-labs/precompile-evm,type=bind",
 	"workspaceFolder": "/go/src/github.com/ava-labs/precompile-evm",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-		  "settings": {
-			"solidity.telemetry": false,
-			"git.autofetch": true
-		  },
-		  "extensions": [
-			"golang.go",
-		  	"nomicfoundation.hardhat-solidity",
-		  	"rangav.vscode-thunder-client"
+			"settings": {
+				"solidity.telemetry": false,
+				"git.autofetch": true
+			},
+			"extensions": [
+				"golang.go",
+				"nomicfoundation.hardhat-solidity",
+				"rangav.vscode-thunder-client"
 			]
 		}
-	  }
+	}
 }

@@ -6,7 +6,7 @@ Precompile-EVM is a repository for registering precompiles to Subnet-EVM without
 
 To effectively build, run, and test Precompile-EVM, the following is a (non-exhaustive) list of dependencies that you will need:
 
-- Golang (1.21 || 1.22)
+- Golang (1.24)
 - Node.js (^20.0)
 - [AvalancheGo](https://github.com/ava-labs/avalanchego)
 - [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli)
@@ -90,6 +90,7 @@ In order to upgrade the Subnet-EVM version, you need to change the version in `g
 [v0.3.1] AvalancheGo@v1.12.2/1.13.0 (Protocol Version: 39)
 [v0.3.2] AvalancheGo@v1.13.2 (Protocol Version: 41)
 [v0.3.3] AvalancheGo@v1.13.5 (Protocol Version: 43)
+[v0.4.0] AvalancheGo@v1.13.5 (Protocol Version: 44)
 ```
 
 ## Release Process
