@@ -18,7 +18,7 @@ jobs:
         with:
           go-version-file: "go.mod"
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v9
         with:
           version: v2.7.2
           working-directory: .
