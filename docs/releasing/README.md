@@ -61,7 +61,7 @@ export SUBNET_EVM_VERSION=v0.7.4
     {
         "build": {
             "args": {
-                "AVALANCHEGO_VERSION": "v1.13.0"
+                "AVALANCHEGO_VERSION": "v1.14.0"
             }
         },
     }
