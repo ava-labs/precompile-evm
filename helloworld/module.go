@@ -70,5 +70,5 @@ func (*configurator) Configure(chainConfig precompileconfig.ChainConfig, cfg pre
 	// Set the initial value under [common.BytesToHash([]byte("storageKey")] to "Hello World!"
 	StoreGreeting(state, defaultGreeting)
 	// AllowList is activated for this precompile. Configuring allowlist addresses here.
-	return config.AllowListConfig.Configure(chainConfig, ContractAddress, state, blockContext)
+	return config.Configure(chainConfig, ContractAddress, state, blockContext)
 }

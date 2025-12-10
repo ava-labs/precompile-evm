@@ -28,8 +28,9 @@ const testGreeting = "test"
 const longString = "a very long string that is longer than 32 bytes and will cause an error"
 
 var (
-	tests = map[string]precompiletest.PrecompileTest{
-		"calling sayHello from NoRole should succeed": {
+	tests = []precompiletest.PrecompileTest{
+		{
+			Name:       "calling sayHello from NoRole should succeed",
 			Caller:     allowlisttest.TestNoRoleAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -53,7 +54,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: "",
 		},
-		"calling sayHello from Enabled should succeed": {
+		{
+			Name:       "calling sayHello from Enabled should succeed",
 			Caller:     allowlisttest.TestEnabledAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -77,7 +79,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: "",
 		},
-		"calling sayHello from Manager should succeed": {
+		{
+			Name:       "calling sayHello from Manager should succeed",
 			Caller:     allowlisttest.TestManagerAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -101,7 +104,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: "",
 		},
-		"calling sayHello from Admin should succeed": {
+		{
+			Name:       "calling sayHello from Admin should succeed",
 			Caller:     allowlisttest.TestAdminAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -125,7 +129,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: "",
 		},
-		"calling sayHello from NoRole with a config should return default greeting": {
+		{
+			Name:       "calling sayHello from NoRole with a config should return default greeting",
 			Caller:     allowlisttest.TestNoRoleAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			Config:     NewConfig(utils.NewUint64(0), nil, nil, nil),
@@ -147,7 +152,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: "",
 		},
-		"insufficient gas for sayHello should fail": {
+		{
+			Name:   "insufficient gas for sayHello should fail",
 			Caller: common.Address{1},
 			InputFn: func(t testing.TB) []byte {
 				input, err := PackSayHello()
@@ -158,7 +164,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
-		"calling setGreeting from NoRole should fail": {
+		{
+			Name:       "calling setGreeting from NoRole should fail",
 			Caller:     allowlisttest.TestNoRoleAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -172,7 +179,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: ErrCannotSetGreeting.Error(),
 		},
-		"calling setGreeting from Enabled should succeed": {
+		{
+			Name:       "calling setGreeting from Enabled should succeed",
 			Caller:     allowlisttest.TestEnabledAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -196,7 +204,8 @@ var (
 				require.Equal(t, greeting, testGreeting)
 			},
 		},
-		"calling setGreeting from Manager should succeed": {
+		{
+			Name:       "calling setGreeting from Manager should succeed",
 			Caller:     allowlisttest.TestManagerAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -220,7 +229,8 @@ var (
 				require.Equal(t, greeting, testGreeting)
 			},
 		},
-		"calling setGreeting from Admin should succeed": {
+		{
+			Name:       "calling setGreeting from Admin should succeed",
 			Caller:     allowlisttest.TestAdminAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -244,7 +254,8 @@ var (
 				require.Equal(t, greeting, testGreeting)
 			},
 		},
-		"readOnly setGreeting should fail": {
+		{
+			Name:   "readOnly setGreeting should fail",
 			Caller: common.Address{1},
 			InputFn: func(t testing.TB) []byte {
 				// CUSTOM CODE STARTS HERE
@@ -258,7 +269,8 @@ var (
 			ReadOnly:    true,
 			ExpectedErr: vm.ErrWriteProtection.Error(),
 		},
-		"insufficient gas for setGreeting should fail": {
+		{
+			Name:       "insufficient gas for setGreeting should fail",
 			Caller:     allowlisttest.TestEnabledAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -276,7 +288,8 @@ var (
 			ExpectedErr: vm.ErrOutOfGas.Error(),
 		},
 		// more custom tests
-		"store greeting then say hello from non-enabled address": {
+		{
+			Name:   "store greeting then say hello from non-enabled address",
 			Caller: allowlisttest.TestNoRoleAddr,
 			BeforeHook: func(t testing.TB, state *extstate.StateDB) {
 				allowlisttest.SetDefaultRoles(Module.Address)(t, state)
@@ -297,7 +310,8 @@ var (
 				return res
 			}(),
 		},
-		"set a very long greeting from enabled address before Durango": {
+		{
+			Name:       "set a very long greeting from enabled address before Durango",
 			Caller:     allowlisttest.TestEnabledAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			// By default Durango is enabled in the tests.
@@ -317,7 +331,8 @@ var (
 			ReadOnly:    false,
 			ExpectedErr: ErrInputExceedsLimit.Error(),
 		},
-		"set a very long greeting from enabled address after Durango": {
+		{
+			Name:       "set a very long greeting from enabled address after Durango",
 			Caller:     allowlisttest.TestEnabledAddr,
 			BeforeHook: allowlisttest.SetDefaultRoles(Module.Address),
 			InputFn: func(t testing.TB) []byte {
@@ -351,7 +366,7 @@ func TestHelloWorldRun(t *testing.T) {
 func TestPackUnpackGreetingChangedEventData(t *testing.T) {
 	// CUSTOM CODE STARTS HERE
 	// set test inputs with proper values here
-	var senderInput common.Address = common.Address{}
+	senderInput := common.Address{}
 
 	dataInput := GreetingChangedEventData{
 		OldGreeting: "",
