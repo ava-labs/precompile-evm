@@ -2,7 +2,7 @@
 
 > **⚠️ WARNING: Do not depend on this repository. It has been deprecated.**
 
-Precompile-EVM is no longer under active development, and no further versions will be released. It only supports Subnet-EVM, which is being replaced by a new L1 VM in [AvalancheGo](https://github.com/ava-labs/avalanchego), and it will not be ported to that VM. For the current state of custom precompile support, and to open issues and discussions, see [AvalancheGo](https://github.com/ava-labs/avalanchego).
+Precompile-EVM is no longer under active development, and no further versions will be released. For the current state of custom precompile support, and to open issues and discussions, see [AvalancheGo](https://github.com/ava-labs/avalanchego).
 
 # Precompile-EVM
 
