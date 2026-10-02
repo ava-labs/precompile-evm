@@ -1,3 +1,9 @@
+# THIS REPOSITORY HAS BEEN ARCHIVED
+
+> **⚠️ WARNING: Do not depend on this repository. It has been deprecated.**
+
+Precompile-EVM is no longer under active development, and no further versions will be released. For the current state of custom precompile support, and to open issues and discussions, see [AvalancheGo](https://github.com/ava-labs/avalanchego).
+
 # Precompile-EVM
 
 Precompile-EVM is a repository for registering precompiles to Subnet-EVM without forking the Subnet-EVM codebase. Subnet-EVM supports registering external precompiles through the `precompile/modules` package. By importing Subnet-EVM as a library, you can register your own precompiles to Subnet-EVM and build it together with Subnet-EVM.
