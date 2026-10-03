@@ -6,7 +6,7 @@ require (
 	github.com/ava-labs/avalanchego v1.14.0
 	github.com/ava-labs/subnet-evm v0.8.0
 	github.com/onsi/ginkgo/v2 v2.25.3
-	github.com/onsi/gomega v1.38.2
+	github.com/onsi/gomega v1.38.3
 	github.com/stretchr/testify v1.11.1
 )
 
